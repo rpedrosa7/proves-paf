@@ -102,7 +102,7 @@
         .dashboard-item {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 0.75rem;
-            padding: 0.65rem;
+            padding: 0.5rem;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -186,22 +186,52 @@
                 <section id="dashboard" class="data-accordion-card rounded-2xl p-4 text-white" onclick="toggleAccordion('dashboard')">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-3">
-                            <i class="fas fa-signal text-uoc-sky"></i>
-                            <h3 class="text-[11px] font-black uppercase tracking-widest">Estat en Directe</h3>
+                            <i class="fas fa-th-large text-uoc-sky"></i>
+                            <h3 class="text-[11px] font-black uppercase tracking-widest">Quadre de comandament</h3>
                         </div>
                         <i class="fas fa-chevron-down text-[10px] opacity-50"></i>
                     </div>
-                    <div class="data-content grid grid-cols-2 gap-2 pt-2">
-                        <div class="dashboard-item">
-                            <p class="text-[8px] text-white/40 font-bold uppercase">Lliurades</p>
-                            <div class="flex items-center space-x-2">
-                                <p class="text-sm font-bold">42.120</p>
-                                <div class="w-1.5 h-1.5 bg-green-400 rounded-full status-pulse"></div>
+                    <div class="data-content pt-2">
+                        <div class="grid grid-cols-3 gap-2">
+                            <!-- Columna Procés -->
+                            <div class="space-y-2">
+                                <p class="text-[7px] text-uoc-sky font-black uppercase text-center border-b border-white/10 pb-1">Procés</p>
+                                <div class="dashboard-item">
+                                    <p class="text-[6px] text-white/40 uppercase">Lliurades</p>
+                                    <p class="text-[10px] font-bold">42.120</p>
+                                </div>
+                                <div class="dashboard-item">
+                                    <p class="text-[6px] text-white/40 uppercase">Correcció</p>
+                                    <p class="text-[10px] font-bold">12%</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="dashboard-item">
-                            <p class="text-[8px] text-white/40 font-bold uppercase">Incidències</p>
-                            <p class="text-sm font-bold text-uoc-sky">0</p>
+                            <!-- Columna Atenció -->
+                            <div class="space-y-2">
+                                <p class="text-[7px] text-uoc-sky font-black uppercase text-center border-b border-white/10 pb-1">Atenció</p>
+                                <div class="dashboard-item">
+                                    <p class="text-[6px] text-white/40 uppercase">Consultes</p>
+                                    <p class="text-[10px] font-bold">154</p>
+                                </div>
+                                <div class="dashboard-item">
+                                    <p class="text-[6px] text-white/40 uppercase">T. Resposta</p>
+                                    <p class="text-[10px] font-bold">4'</p>
+                                </div>
+                            </div>
+                            <!-- Columna Tecnologia -->
+                            <div class="space-y-2">
+                                <p class="text-[7px] text-uoc-sky font-black uppercase text-center border-b border-white/10 pb-1">Tecnologia</p>
+                                <div class="dashboard-item">
+                                    <p class="text-[6px] text-white/40 uppercase">Sistemes</p>
+                                    <div class="flex items-center space-x-1">
+                                        <p class="text-[10px] font-bold">OK</p>
+                                        <div class="w-1 h-1 bg-green-400 rounded-full status-pulse"></div>
+                                    </div>
+                                </div>
+                                <div class="dashboard-item">
+                                    <p class="text-[6px] text-white/40 uppercase">Incidències</p>
+                                    <p class="text-[10px] font-bold text-uoc-sky">0</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
