@@ -22,16 +22,17 @@
             scroll-behavior: smooth;
         }
 
-        /* Targetes d'edifici amb fons d'imatge */
+        /* Targetes d'edifici amb fons d'imatge realçat */
         .floor-card {
-            height: 140px;
+            height: 150px;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             position: relative;
             overflow: hidden;
             border-radius: 1.25rem;
-            border: 2px solid transparent;
-            background-color: var(--uoc-blue);
+            border: 2px solid white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            background-color: #e2e8f0;
         }
 
         .floor-card .bg-image {
@@ -40,7 +41,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(100%) brightness(0.4);
+            filter: brightness(0.7) saturate(1.2); /* Foto més viva per defecte */
             transition: all 0.6s ease;
             z-index: 0;
         }
@@ -48,25 +49,26 @@
         .floor-card .overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0,0,120,0.9) 0%, rgba(0,0,120,0.2) 100%);
+            /* Degradat suau només a la base per a la llegibilitat del text */
+            background: linear-gradient(to top, rgba(0,0,50,0.8) 0%, rgba(0,0,50,0.2) 50%, transparent 100%);
             z-index: 1;
             transition: all 0.4s ease;
         }
 
         .floor-active {
-            height: 160px;
+            height: 170px;
             border-color: var(--uoc-sky);
-            transform: scale(1.02);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 120, 0.3);
+            transform: scale(1.03);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 120, 0.2);
         }
 
         .floor-active .bg-image {
-            filter: grayscale(0%) brightness(0.6);
-            transform: scale(1.1);
+            filter: brightness(1) saturate(1.3); /* Foto totalment il·luminada en estar actiu */
+            transform: scale(1.05);
         }
 
         .floor-active .overlay {
-            background: linear-gradient(to top, rgba(0,0,120,0.95) 20%, rgba(0,0,120,0.1) 100%);
+            background: linear-gradient(to top, rgba(0,0,120,0.9) 10%, transparent 70%);
         }
 
         /* Acordions de dades */
@@ -207,7 +209,7 @@
 
             <!-- Navegació d'edificis -->
             <div class="pt-2">
-                <h2 class="text-[10px] font-black text-slate-400 uppercase mb-4 tracking-[0.2em] px-2">Explora els espais</h2>
+                <h2 class="text-[10px] font-black text-slate-400 uppercase mb-4 tracking-[0.2em] px-2 text-center lg:text-left">Explora els espais</h2>
                 <div id="floor-list" class="space-y-4">
                     <!-- Es carregarà amb JS -->
                 </div>
@@ -277,10 +279,10 @@
                     <img src="${data.image}" class="bg-image" onerror="this.src='https://via.placeholder.com/600x400?text=${data.label}'">
                     <div class="overlay"></div>
                     <div class="relative z-10 h-full p-6 flex flex-col justify-end text-white">
-                        <span class="text-[9px] font-black uppercase tracking-widest text-uoc-sky mb-1 opacity-80">${data.label}</span>
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-uoc-sky mb-1 drop-shadow-md">${data.label}</span>
                         <div class="flex items-center space-x-3">
-                            <i class="fas ${data.icon} text-sm"></i>
-                            <h3 class="text-lg font-bold tracking-tight">${data.title}</h3>
+                            <i class="fas ${data.icon} text-sm drop-shadow-md"></i>
+                            <h3 class="text-xl font-black tracking-tight drop-shadow-lg">${data.title}</h3>
                         </div>
                     </div>`;
                 list.appendChild(btn);
@@ -300,46 +302,53 @@
             dynamicView.classList.remove('hidden');
 
             dynamicView.innerHTML = `
-                <div class="space-y-8">
-                    <div class="flex items-center space-x-4 border-b border-slate-100 pb-6">
-                        <div class="w-12 h-12 bg-uoc-blue rounded-xl flex items-center justify-center text-uoc-sky">
-                            <i class="fas ${data.icon} text-xl"></i>
+                <div class="space-y-8 animate-fadeIn">
+                    <div class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-6 border-b border-slate-100 pb-8">
+                        <div class="w-16 h-16 bg-uoc-blue rounded-2xl flex items-center justify-center text-uoc-sky shadow-lg shadow-blue-900/20">
+                            <i class="fas ${data.icon} text-2xl"></i>
                         </div>
                         <div>
-                            <span class="text-xs font-bold text-uoc-blue/40 uppercase tracking-widest">${data.label}</span>
-                            <h2 class="text-2xl font-black text-uoc-blue uppercase">${data.title}</h2>
+                            <span class="text-xs font-bold text-uoc-blue/40 uppercase tracking-widest block mb-1">${data.label}</span>
+                            <h2 class="text-3xl font-black text-uoc-blue uppercase tracking-tight">${data.title}</h2>
                         </div>
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                        <div class="space-y-6">
-                            <div>
-                                <h4 class="text-[10px] font-black text-uoc-blue uppercase tracking-widest mb-3 flex items-center">
-                                    <span class="w-6 h-px bg-uoc-sky mr-2"></span> Descripció del Servei
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <div class="space-y-8">
+                            <div class="bg-blue-50/30 p-6 rounded-3xl border border-blue-100/50">
+                                <h4 class="text-[10px] font-black text-uoc-blue uppercase tracking-widest mb-4 flex items-center">
+                                    <i class="fas fa-info-circle mr-2 text-uoc-sky"></i> Descripció del Servei
                                 </h4>
-                                <p class="text-slate-600 text-sm leading-relaxed">${data.desc}</p>
+                                <p class="text-slate-700 text-sm leading-relaxed font-medium">${data.desc}</p>
                             </div>
-                            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 italic text-slate-400 text-xs">
-                                "Contingut pendent de validació pel responsable de l'edifici."
+                            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 italic text-slate-400 text-xs flex items-center">
+                                <i class="fas fa-clock mr-3 text-slate-300 text-lg"></i>
+                                <span>"Contingut pendent de validació definitiva pel responsable d'edifici."</span>
                             </div>
                         </div>
                         
                         <div class="space-y-6">
-                            <h4 class="text-[10px] font-black text-uoc-blue uppercase tracking-widest mb-3 flex items-center">
-                                <span class="w-6 h-px bg-uoc-sky mr-2"></span> Protocols clau
+                            <h4 class="text-[10px] font-black text-uoc-blue uppercase tracking-widest mb-4 flex items-center">
+                                <i class="fas fa-shield-halved mr-2 text-uoc-sky"></i> Protocols Operatius
                             </h4>
-                            <ul class="space-y-4">
-                                <li class="flex items-center space-x-3 text-sm text-slate-500 bg-white p-3 rounded-xl border border-slate-100 shadow-sm">
-                                    <i class="fas fa-check-circle text-uoc-sky"></i>
-                                    <span>Control d'accés i seguretat</span>
+                            <ul class="space-y-3">
+                                <li class="flex items-center space-x-4 text-sm text-slate-600 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center">
+                                        <i class="fas fa-check text-green-500 text-xs"></i>
+                                    </div>
+                                    <span class="font-semibold">Control d'accés i seguretat</span>
                                 </li>
-                                <li class="flex items-center space-x-3 text-sm text-slate-500 bg-white p-3 rounded-xl border border-slate-100 shadow-sm">
-                                    <i class="fas fa-check-circle text-uoc-sky"></i>
-                                    <span>Gestió de fluxos de dades</span>
+                                <li class="flex items-center space-x-4 text-sm text-slate-600 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center">
+                                        <i class="fas fa-check text-blue-500 text-xs"></i>
+                                    </div>
+                                    <span class="font-semibold">Gestió de fluxos de dades</span>
                                 </li>
-                                <li class="flex items-center space-x-3 text-sm text-slate-500 bg-white p-3 rounded-xl border border-slate-100 shadow-sm">
-                                    <i class="fas fa-check-circle text-uoc-sky"></i>
-                                    <span>Suport en temps real</span>
+                                <li class="flex items-center space-x-4 text-sm text-slate-600 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-8 h-8 rounded-full bg-uoc-sky/20 flex items-center justify-center">
+                                        <i class="fas fa-check text-uoc-blue text-xs"></i>
+                                    </div>
+                                    <span class="font-semibold">Suport directe en temps real</span>
                                 </li>
                             </ul>
                         </div>
