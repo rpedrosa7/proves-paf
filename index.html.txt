@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dispositiu Proves Finals - UOC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        
+        :root {
+            --uoc-blue: #000078;
+            --uoc-sky: #73edff;
+            --uoc-sand: #ffc0a0;
+            --uoc-orange: #ff6a13;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        /* Acordions de dades i navegació */
+        .floor-card, .data-accordion-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            background-color: var(--uoc-blue);
+            max-height: 72px; /* Mida col·lapsada */
+        }
+
+        .floor-active, .data-active {
+            max-height: 1200px; 
+            background-color: #00005a;
+            border-left: 8px solid var(--uoc-sky);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 120, 0.2);
+        }
+
+        .card-bg-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) brightness(0.2);
+            opacity: 0.2;
+            transition: all 0.5s ease;
+            z-index: 0;
+        }
+
+        .card-overlay {
+            background: linear-gradient(to right, var(--uoc-blue) 40%, rgba(0, 0, 120, 0.05) 100%);
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .floor-content, .data-content {
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .floor-active .floor-content, .data-active .data-content {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            margin-top: 1rem;
+        }
+
+        /* Animació de pols */
+        .status-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.6; }
+            70% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.6; }
+        }
+
+        /* Estils de dades */
+        .data-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            color: var(--uoc-sky);
+        }
+
+        .sub-data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(115, 237, 255, 0.1);
+        }
+
+        .dashboard-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.75rem;
+            padding: 0.65rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Estils logotip UOC */
+        .uoc-logo-container { display: flex; align-items: center; }
+        .uoc-symbol {
+            background-color: var(--uoc-blue);
+            color: white;
+            font-weight: 800;
+            padding: 4px 10px;
+            font-size: 1.8rem;
+            letter-spacing: -0.05em;
+            display: flex; align-items: center;
+        }
+        .uoc-logo-text {
+            color: var(--uoc-blue);
+            font-weight: 400;
+            font-size: 0.95rem;
+            line-height: 1.1;
+            padding-left: 12px;
+            margin-left: 12px;
+            border-left: 1px solid #cbd5e1;
+            max-width: 150px;
+        }
+
+        .stats-step {
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 1px dashed rgba(115, 237, 255, 0.2);
+            margin-bottom: 1.25rem;
+        }
+        .stats-step::before {
+            content: '';
+            position: absolute;
+            left: -4px; top: 0;
+            width: 7px; height: 7px;
+            background: var(--uoc-sky);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Capçalera -->
+    <header class="bg-white border-b-4 border-[#000078] sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="uoc-logo-container">
+                <div class="uoc-symbol">UOC</div>
+                <div class="uoc-logo-text">Universitat Oberta<br>de Catalunya</div>
+                <div class="hidden md:block ml-8 h-10 w-px bg-slate-200"></div>
+                <div class="hidden md:block ml-8">
+                    <h1 class="text-sm font-black text-[#000078] uppercase tracking-tight">Dispositiu Proves Finals</h1>
+                    <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold mt-1">Metodologia i Tecnologia Educativa</p>
+                </div>
+            </div>
+            <div id="real-time-clock" class="font-mono text-sm font-bold text-[#000078] bg-slate-100 px-5 py-2.5 rounded-full border border-slate-200 shadow-inner">
+                00:00:00
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Columna Esquerra: Dades i Navegació -->
+        <div class="lg:col-span-4 space-y-5">
+            
+            <!-- PAF en Xifres -->
+            <section id="paf-stats-accordion" class="data-accordion-card rounded-2xl p-5 text-white shadow-md group" onclick="toggleAccordion('paf-stats-accordion')">
+                <div class="card-overlay opacity-20"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-chart-line text-uoc-sky text-sm"></i>
+                            <h3 class="text-xs font-black uppercase tracking-[0.15em] text-uoc-sky">PAF en xifres</h3>
+                        </div>
+                        <i class="fas fa-chevron-down text-[10px] opacity-40 transition-transform duration-300 accordion-icon"></i>
+                    </div>
+                    
+                    <div class="data-content">
+                        <div class="h-px bg-uoc-sky/20 w-full my-4"></div>
+                        
+                        <!-- Pas 1: Volum -->
+                        <div class="stats-step">
+                            <h4 class="text-[9px] font-black text-uoc-sky/80 uppercase mb-3">Activitat Acadèmica</h4>
+                            <div class="grid grid-cols-2 gap-2 mb-2">
+                                <div class="bg-black/20 p-2.5 rounded-lg border-l-2 border-uoc-sky">
+                                    <p class="data-label">Programes</p>
+                                    <p class="text-sm font-bold">1.120</p>
+                                </div>
+                                <div class="bg-black/20 p-2.5 rounded-lg border-l-2 border-uoc-sky">
+                                    <p class="data-label">Assignatures</p>
+                                    <p class="text-sm font-bold">3.700</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="bg-black/30 p-2.5 rounded-lg border-l-2 border-white/40">
+                                    <p class="data-label text-white/50">Estudiants</p>
+                                    <p class="text-sm font-bold">80.000</p>
+                                </div>
+                                <div class="bg-uoc-sky/15 p-2.5 rounded-lg border-l-2 border-uoc-sky">
+                                    <p class="data-label">Assignacions aula</p>
+                                    <p class="text-sm font-bold">247.000</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pas 2: Model d'Avaluació -->
+                        <div class="stats-step">
+                            <h4 class="text-[9px] font-black text-uoc-sky/80 uppercase mb-3">Model d'Avaluació</h4>
+                            <div class="bg-white/5 p-3 rounded-lg border border-white/10 mb-2.5">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-[10px] font-bold text-white/70 uppercase">Sense prova final</span>
+                                    <span class="text-xs font-black">61%</span>
+                                </div>
+                            </div>
+                            <div class="bg-uoc-sky/10 p-3 rounded-lg border border-uoc-sky/30">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-[10px] font-bold text-uoc-sky uppercase">Amb prova final (PAF)</span>
+                                    <span class="text-xs font-black">39%</span>
+                                </div>
+                                <div class="space-y-1.5 pt-2 border-t border-uoc-sky/20">
+                                    <div class="flex justify-between text-[9px] text-white/50">
+                                        <span>Superen AC (eximits)</span><span>20%</span>
+                                    </div>
+                                    <div class="flex justify-between text-[9px] text-white/50">
+                                        <span>No superen AC</span><span>8%</span>
+                                    </div>
+                                    <div class="flex justify-between text-[10px] font-black text-white mt-1 pt-1 border-t border-white/5">
+                                        <span>Han de fer prova final</span><span>72%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pas 3: Logística -->
+                        <div class="stats-step mb-0 border-l-0">
+                            <h4 class="text-[9px] font-black text-uoc-sky/80 uppercase mb-3">Dispositiu Logístic</h4>
+                            <div class="bg-black/30 p-4 rounded-xl border border-uoc-sky/20">
+                                <div class="flex justify-between items-center mb-3 border-b border-uoc-sky/20 pb-2">
+                                    <p class="text-[10px] font-bold uppercase tracking-widest text-uoc-sky">Total Proves</p>
+                                    <p class="text-xl font-black">69.500</p>
+                                </div>
+                                <div class="space-y-2 text-[10px]">
+                                    <div class="sub-data-row"><span>Proves Finals</span><span class="font-bold">16.500</span></div>
+                                    <div class="sub-data-row"><span>Proves de Síntesi</span><span class="font-bold">30.000</span></div>
+                                    <div class="sub-data-row"><span>Exàmens</span><span class="font-bold">23.000</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quadre de Comandament (3 COLUMNES) -->
+            <section id="dashboard-accordion" class="data-accordion-card rounded-2xl p-5 text-white shadow-md border-b-4 border-uoc-sky" onclick="toggleAccordion('dashboard-accordion')">
+                <div class="card-overlay opacity-10"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-tachometer-alt text-uoc-sky text-sm"></i>
+                            <h3 class="text-xs font-black uppercase tracking-[0.15em]">Quadre de comandament</h3>
+                        </div>
+                        <i class="fas fa-chevron-down text-[10px] opacity-40 transition-transform duration-300 accordion-icon"></i>
+                    </div>
+                    
+                    <div class="data-content">
+                        <div class="h-px bg-uoc-sky/20 w-full my-4"></div>
+                        <div class="grid grid-cols-3 gap-3">
+                            
+                            <!-- Columna 1: Procés -->
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-1.5 mb-2">
+                                    <i class="fas fa-gears text-[10px] text-uoc-sky"></i>
+                                    <h4 class="text-[8px] font-black text-uoc-sky uppercase tracking-wider">Procés</h4>
+                                </div>
+                                <div class="dashboard-item border-l-2 border-uoc-sky/40">
+                                    <p class="text-[7px] text-white/40 font-bold uppercase">Previstes</p>
+                                    <p class="text-[11px] font-bold">--.---</p>
+                                </div>
+                                <div class="dashboard-item border-l-2 border-green-400">
+                                    <p class="text-[7px] text-white/40 font-bold uppercase">Lliurades</p>
+                                    <div class="flex items-center space-x-1">
+                                        <p class="text-[11px] font-bold text-green-400">--.---</p>
+                                        <div class="w-1 h-1 bg-green-500 rounded-full status-pulse"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Columna 2: Atenció -->
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-1.5 mb-2">
+                                    <i class="fas fa-headset text-[10px] text-uoc-sky"></i>
+                                    <h4 class="text-[8px] font-black text-uoc-sky uppercase tracking-wider">Atenció</h4>
+                                </div>
+                                <div class="dashboard-item border-l-2 border-orange-400">
+                                    <p class="text-[7px] text-white/40 font-bold uppercase">Incidències</p>
+                                    <p class="text-[11px] font-bold text-orange-400">0</p>
+                                </div>
+                                <div class="dashboard-item border-l-2 border-uoc-sand/40">
+                                    <p class="text-[7px] text-white/40 font-bold uppercase">Tiquets Suport</p>
+                                    <p class="text-[11px] font-bold">0</p>
+                                </div>
+                            </div>
+
+                            <!-- Columna 3: Tecnologia -->
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-1.5 mb-2">
+                                    <i class="fas fa-microchip text-[10px] text-uoc-sky"></i>
+                                    <h4 class="text-[8px] font-black text-uoc-sky uppercase tracking-wider">Tecnologia</h4>
+                                </div>
+                                <div class="dashboard-item border-l-2 border-blue-400">
+                                    <p class="text-[7px] text-white/40 font-bold uppercase">Uptime Sist.</p>
+                                    <p class="text-[11px] font-bold text-blue-300">100%</p>
+                                </div>
+                                <div class="dashboard-item border-l-2 border-red-400/30">
+                                    <p class="text-[7px] text-white/40 font-bold uppercase">Càrrega Serv.</p>
+                                    <p class="text-[11px] font-bold">-- %</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Itinerari Navegació -->
+            <nav id="sidebar-navigation">
+                <div class="px-2 mb-4">
+                    <h2 class="text-[10px] font-black text-slate-400 uppercase mb-2 tracking-[0.2em] flex items-center">
+                        <span class="w-6 h-px bg-slate-200 mr-2"></span>
+                        Explora els espais
+                    </h2>
+                </div>
+                <div id="floor-list" class="space-y-3">
+                    <!-- Botons d'edifici -->
+                </div>
+            </nav>
+        </div>
+
+        <!-- Columna Dreta: Contingut Dinàmic -->
+        <div class="lg:col-span-8">
+            <div id="content-area" class="bg-white rounded-3xl shadow-sm border border-slate-200 min-h-[750px] flex flex-col p-8 relative overflow-hidden transition-all duration-500">
+                <!-- Estat per defecte (Minimalista) -->
+                <div id="default-view" class="h-full flex flex-col items-center justify-center text-center space-y-4 py-20">
+                    <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center border border-slate-100 mb-2">
+                        <i class="fas fa-arrow-left text-slate-300 text-xl animate-pulse"></i>
+                    </div>
+                    <p class="text-slate-400 font-medium text-sm">
+                        Seleccioneu un edifici per començar l'itinerari
+                    </p>
+                </div>
+                <!-- Contingut que es carregarà -->
+                <div id="dynamic-view" class="hidden">
+                    <!-- Es carregarà mitjançant JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="max-w-7xl mx-auto px-4 py-12 text-center border-t border-slate-200 mt-12">
+        <p class="text-[#000078] text-[10px] font-black uppercase tracking-[0.4em] opacity-30">Universitat Oberta de Catalunya</p>
+    </footer>
+
+    <script>
+        // Hem actualitzat les rutes de les imatges perquè busquin els fitxers que pujaràs a GitHub
+        const buildingData = {
+            'U': {
+                label: "Edifici U",
+                title: "Atenció i Control (NOC)",
+                icon: "fa-network-wired",
+                image: "edifici_u.jpg", // Nom del fitxer que pujaràs
+                color: "#000078",
+                desc: "Monitoratge de xarxa i suport tecnològic crític."
+            },
+            'O': {
+                label: "Edifici O",
+                title: "Logística Acadèmica",
+                icon: "fa-clipboard-list",
+                image: "edifici_o.jpg", // Nom del fitxer que pujaràs
+                color: "#ff6a13",
+                desc: "Gestió administrativa de les proves i tribunals."
+            },
+            'C': {
+                label: "Edifici C",
+                title: "Innovació Educativa",
+                icon: "fa-lightbulb",
+                image: "edifici_c.jpg", // Nom del fitxer que pujaràs
+                color: "#73edff",
+                desc: "Noves metodologies i qualitat docent."
+            }
+        };
+
+        function toggleAccordion(id) {
+            const el = document.getElementById(id);
+            const icon = el.querySelector('.accordion-icon');
+            const isActive = el.classList.contains('data-active');
+            
+            if (isActive) {
+                el.classList.remove('data-active');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                el.classList.add('data-active');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function selectFloor(id) {
+            const data = buildingData[id];
+            const defaultView = document.getElementById('default-view');
+            const dynamicView = document.getElementById('dynamic-view');
+            const contentArea = document.getElementById('content-area');
+
+            document.querySelectorAll('.floor-card').forEach(card => card.classList.remove('floor-active'));
+            document.getElementById(`floor-btn-${id}`).classList.add('floor-active');
+
+            defaultView.classList.add('hidden');
+            dynamicView.classList.remove('hidden');
+
+            dynamicView.innerHTML = `
+                <div class="animate-fadeIn">
+                    <div class="relative h-48 w-full rounded-2xl overflow-hidden mb-8 shadow-inner">
+                        <img src="${data.image}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/1200x600?text=Imatge+no+trobada'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#000078]/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-uoc-sky mb-1 block">${data.label}</span>
+                            <h2 class="text-2xl font-black uppercase tracking-tight">${data.title}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <h3 class="text-sm font-black text-[#000078] uppercase tracking-wider border-b pb-2">Visió General</h3>
+                            <p class="text-slate-600 leading-relaxed text-sm">
+                                [Aquí el responsable del servei inclourà la descripció detallada del funcionament de l'espai ${data.label}. Estem a l'espera del contingut definitiu.]
+                            </p>
+                            <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100 italic text-slate-400 text-xs">
+                                "La descripció del servei proporcionarà el context operatiu necessari per a la visita."
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <h3 class="text-sm font-black text-[#000078] uppercase tracking-wider border-b pb-2">Sistemes i Protocols</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                                    <i class="fas fa-check-circle text-uoc-sky mt-1"></i>
+                                    <span>Protocol d'actuació estandarditzat</span>
+                                </li>
+                                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                                    <i class="fas fa-check-circle text-uoc-sky mt-1"></i>
+                                    <span>Monitoratge de punts crítics</span>
+                                </li>
+                                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                                    <i class="fas fa-check-circle text-uoc-sky mt-1"></i>
+                                    <span>Escalat d'incidències</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderFloorButtons() {
+            const list = document.getElementById('floor-list');
+            list.innerHTML = '';
+            Object.keys(buildingData).forEach(id => {
+                const data = buildingData[id];
+                const btn = document.createElement('div');
+                btn.id = `floor-btn-${id}`;
+                btn.className = "floor-card p-5 rounded-2xl shadow-sm flex flex-col group border-slate-200 bg-white";
+                btn.onclick = () => selectFloor(id);
+                btn.innerHTML = `
+                    <img src="${data.image}" class="card-bg-image" onerror="this.style.display='none'">
+                    <div class="card-overlay"></div>
+                    <div class="relative z-10 flex justify-between items-center w-full text-white">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-uoc-sky/10 flex items-center justify-center border border-uoc-sky/20">
+                                <i class="fas ${data.icon} text-uoc-sky text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-[9px] font-black uppercase tracking-[0.2em] text-uoc-sky block opacity-80">${data.label}</span>
+                                <h3 class="text-sm font-bold leading-none group-hover:text-uoc-sky transition-colors">${data.title}</h3>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right text-[10px] opacity-30 transition-all group-hover:translate-x-1" id="icon-${id}"></i>
+                    </div>
+                    <div class="floor-content relative z-10 text-white/70">
+                        <div class="h-px bg-uoc-sky/10 w-full mb-4"></div>
+                        <p class="text-[11px] leading-relaxed italic">${data.desc}</p>
+                    </div>`;
+                list.appendChild(btn);
+            });
+        }
+
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('real-time-clock').innerText = now.toLocaleTimeString('ca-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+        window.onload = renderFloorButtons;
+    </script>
+</body>
+</html>
