@@ -41,7 +41,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.7) saturate(1.2); /* Foto més viva per defecte */
+            filter: brightness(0.7) saturate(1.2);
             transition: all 0.6s ease;
             z-index: 0;
         }
@@ -49,7 +49,6 @@
         .floor-card .overlay {
             position: absolute;
             inset: 0;
-            /* Degradat suau només a la base per a la llegibilitat del text */
             background: linear-gradient(to top, rgba(0,0,50,0.8) 0%, rgba(0,0,50,0.2) 50%, transparent 100%);
             z-index: 1;
             transition: all 0.4s ease;
@@ -63,7 +62,7 @@
         }
 
         .floor-active .bg-image {
-            filter: brightness(1) saturate(1.3); /* Foto totalment il·luminada en estar actiu */
+            filter: brightness(1) saturate(1.3);
             transform: scale(1.05);
         }
 
@@ -82,7 +81,7 @@
         }
 
         .data-active {
-            max-height: 1000px;
+            max-height: 2000px;
             background-color: #00005a;
         }
 
@@ -113,6 +112,22 @@
             0% { transform: scale(0.9); opacity: 0.5; }
             70% { transform: scale(1.2); opacity: 1; }
             100% { transform: scale(0.9); opacity: 0.5; }
+        }
+
+        /* Estils de la línia de flux de PAF en xifres */
+        .flow-line {
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 1px dashed rgba(115, 237, 255, 0.3);
+        }
+        .flow-dot {
+            position: absolute;
+            left: -4px;
+            top: 0.5rem;
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background-color: var(--uoc-sky);
         }
 
         /* Capçalera UOC */
@@ -165,19 +180,84 @@
                         </div>
                         <i class="fas fa-chevron-down text-[10px] opacity-50"></i>
                     </div>
-                    <div class="data-content text-xs space-y-3 pt-2">
-                        <div class="flex justify-between border-b border-white/10 pb-2">
-                            <span class="text-white/60 uppercase text-[9px]">Estudiants</span>
-                            <span class="font-bold">80.000</span>
+                    <div class="data-content pt-2 space-y-4">
+                        <!-- Bloc 1: Context -->
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="dashboard-item">
+                                <p class="text-[6px] text-white/40 uppercase">Programes</p>
+                                <p class="text-[11px] font-bold">1.120</p>
+                            </div>
+                            <div class="dashboard-item">
+                                <p class="text-[6px] text-white/40 uppercase">Assignatures</p>
+                                <p class="text-[11px] font-bold">3.700</p>
+                            </div>
+                            <div class="dashboard-item">
+                                <p class="text-[6px] text-white/40 uppercase">Estudiants</p>
+                                <p class="text-[11px] font-bold">80.000</p>
+                            </div>
+                            <div class="dashboard-item">
+                                <p class="text-[6px] text-white/40 uppercase">Assignacions</p>
+                                <p class="text-[11px] font-bold">247.000</p>
+                            </div>
                         </div>
-                        <div class="flex justify-between border-b border-white/10 pb-2">
-                            <span class="text-white/60 uppercase text-[9px]">Assignacions</span>
-                            <span class="font-bold">247.000</span>
+
+                        <!-- Bloc 2: Model d'Avaluació -->
+                        <div class="bg-white/5 p-3 rounded-xl space-y-2 border border-white/10">
+                            <p class="text-[8px] font-black text-uoc-sky uppercase tracking-tighter mb-2">Tipus de Model d'Avaluació</p>
+                            <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
+                                <span class="text-[10px] font-bold uppercase text-white/60">Sense prova final</span>
+                                <span class="text-[12px] font-black italic text-white/60">61%</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-uoc-sky/20 p-2 rounded-lg border border-uoc-sky/30">
+                                <span class="text-[10px] font-bold uppercase">Amb prova final (PAF)</span>
+                                <span class="text-[12px] font-black italic">39%</span>
+                            </div>
                         </div>
-                        <div class="bg-uoc-sky/10 p-3 rounded-lg border border-uoc-sky/20">
-                            <div class="flex justify-between items-center">
-                                <span class="text-[10px] font-bold text-uoc-sky uppercase">Total Proves</span>
-                                <span class="text-lg font-black italic">69.500</span>
+
+                        <!-- Bloc 3: Flux cap a la prova (Seqüència lògica) -->
+                        <div class="flow-line space-y-3">
+                            <div class="relative">
+                                <div class="flow-dot"></div>
+                                <p class="text-[10px] font-bold text-white/80">Del 39% amb PAF:</p>
+                                <div class="grid grid-cols-1 gap-2 mt-1">
+                                    <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center">
+                                        <div>
+                                            <p class="text-[6px] text-white/40 uppercase">Superen AC</p>
+                                            <p class="text-[10px] font-bold">20% <span class="text-[8px] font-normal lowercase opacity-60 ml-1">exempts prova final</span></p>
+                                        </div>
+                                        <i class="fas fa-user-check text-uoc-sky/40 text-[10px]"></i>
+                                    </div>
+                                    <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center">
+                                        <div>
+                                            <p class="text-[6px] text-white/40 uppercase">No aproven AC</p>
+                                            <p class="text-[10px] font-bold">8% <span class="text-[8px] font-normal lowercase opacity-60 ml-1">no poden fer la prova final</span></p>
+                                        </div>
+                                        <i class="fas fa-user-times text-red-400/40 text-[10px]"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <div class="flow-dot" style="background-color: #fff;"></div>
+                                <p class="text-[11px] font-black text-uoc-sky uppercase italic">72% han de fer la prova</p>
+                                <div class="bg-uoc-sky/10 border border-uoc-sky/30 p-3 rounded-xl mt-2">
+                                    <p class="text-center text-xl font-black italic">69.500</p>
+                                    <p class="text-[6px] text-center text-uoc-sky uppercase font-bold">Total Proves a gestionar</p>
+                                    
+                                    <div class="grid grid-cols-3 gap-1 mt-3 pt-2 border-t border-uoc-sky/20">
+                                        <div class="text-center">
+                                            <p class="text-[9px] font-bold">16.500</p>
+                                            <p class="text-[5px] text-white/40 uppercase">Finals</p>
+                                        </div>
+                                        <div class="text-center">
+                                            <p class="text-[9px] font-bold">30.000</p>
+                                            <p class="text-[5px] text-white/40 uppercase">Síntesi</p>
+                                        </div>
+                                        <div class="text-center">
+                                            <p class="text-[9px] font-bold">23.000</p>
+                                            <p class="text-[5px] text-white/40 uppercase">Exàmens</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -193,7 +273,6 @@
                     </div>
                     <div class="data-content pt-2">
                         <div class="grid grid-cols-3 gap-2">
-                            <!-- Columna Procés -->
                             <div class="space-y-2">
                                 <p class="text-[7px] text-uoc-sky font-black uppercase text-center border-b border-white/10 pb-1">Procés</p>
                                 <div class="dashboard-item">
@@ -205,7 +284,6 @@
                                     <p class="text-[10px] font-bold">12%</p>
                                 </div>
                             </div>
-                            <!-- Columna Atenció -->
                             <div class="space-y-2">
                                 <p class="text-[7px] text-uoc-sky font-black uppercase text-center border-b border-white/10 pb-1">Atenció</p>
                                 <div class="dashboard-item">
@@ -217,7 +295,6 @@
                                     <p class="text-[10px] font-bold">4'</p>
                                 </div>
                             </div>
-                            <!-- Columna Tecnologia -->
                             <div class="space-y-2">
                                 <p class="text-[7px] text-uoc-sky font-black uppercase text-center border-b border-white/10 pb-1">Tecnologia</p>
                                 <div class="dashboard-item">
