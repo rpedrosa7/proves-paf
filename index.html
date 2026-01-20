@@ -96,6 +96,10 @@
             border-radius: 0.75rem;
             padding: 0.5rem;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 48px;
         }
 
         .status-pulse {
@@ -209,7 +213,13 @@
                         </div>
                         <i class="fas fa-chevron-down text-[10px] opacity-50"></i>
                     </div>
+                    
                     <div class="data-content pt-2 space-y-4">
+                        <!-- Títol 01. CONTEXT GLOBAL -->
+                        <div class="px-1 pt-2">
+                            <h2 class="text-[10px] font-black text-[#73edff] uppercase tracking-[0.15em] italic">01. CONTEXT GLOBAL</h2>
+                        </div>
+
                         <div class="grid grid-cols-2 gap-2">
                             <div class="dashboard-item">
                                 <p class="text-[6px] text-white/40 uppercase">Programes</p>
@@ -227,6 +237,11 @@
                                 <p class="text-[6px] text-white/40 uppercase">Assignacions</p>
                                 <p class="text-[11px] font-bold">247.000</p>
                             </div>
+                        </div>
+
+                        <!-- Títol 02. MODELS D'AVALUACIÓ -->
+                        <div class="px-1 pt-2 border-t border-white/10">
+                            <h2 class="text-[10px] font-black text-[#73edff] uppercase tracking-[0.15em] italic">02. MODELS D'AVALUACIÓ</h2>
                         </div>
 
                         <div class="bg-white/5 p-3 rounded-xl space-y-2 border border-white/10">
@@ -265,24 +280,30 @@
                             <div class="relative">
                                 <div class="flow-dot" style="background-color: #fff;"></div>
                                 <p class="text-[11px] font-black text-uoc-sky uppercase italic">72% han de fer la prova</p>
-                                <div class="bg-uoc-sky/10 border border-uoc-sky/30 p-3 rounded-xl mt-2">
-                                    <p class="text-center text-xl font-black italic">67.750</p>
-                                    <p class="text-[6px] text-center text-uoc-sky uppercase font-bold">Proves convocades</p>
-                                    
-                                    <div class="grid grid-cols-1 gap-2 mt-4 pt-2 border-t border-uoc-sky/20">
-                                        <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
-                                            <p class="text-[8px] text-white/40 uppercase leading-none">Proves tradicionals síncrones</p>
-                                            <p class="text-[10px] font-bold ml-2">46.000</p>
-                                        </div>
-                                        <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
-                                            <p class="text-[8px] text-white/40 uppercase leading-none">Nou model proves Canvas asíncrones</p>
-                                            <p class="text-[10px] font-bold ml-2">16.250</p>
-                                        </div>
-                                        <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
-                                            <p class="text-[8px] text-white/40 uppercase leading-none">Proves presencials FP</p>
-                                            <p class="text-[10px] font-bold ml-2">5.500</p>
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+
+                        <!-- Títol 03. PROVES FINALS -->
+                        <div class="px-1 pt-2 border-t border-white/10">
+                            <h2 class="text-[10px] font-black text-[#73edff] uppercase tracking-[0.15em] italic">03. PROVES FINALS</h2>
+                        </div>
+
+                        <div class="bg-uoc-sky/10 border border-uoc-sky/30 p-3 rounded-xl">
+                            <p class="text-center text-xl font-black italic">67.750</p>
+                            <p class="text-[6px] text-center text-uoc-sky uppercase font-bold">Proves convocades</p>
+                            
+                            <div class="grid grid-cols-1 gap-2 mt-4 pt-2 border-t border-uoc-sky/20">
+                                <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
+                                    <p class="text-[8px] text-white/40 uppercase leading-none">Proves tradicionals síncrones</p>
+                                    <p class="text-[10px] font-bold ml-2">46.000</p>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
+                                    <p class="text-[8px] text-white/40 uppercase leading-none">Nou model proves Canvas asíncrones</p>
+                                    <p class="text-[10px] font-bold ml-2">16.250</p>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
+                                    <p class="text-[8px] text-white/40 uppercase leading-none">Proves presencials FP</p>
+                                    <p class="text-[10px] font-bold ml-2">5.500</p>
                                 </div>
                             </div>
                         </div>
@@ -304,24 +325,24 @@
                             <div class="space-y-2">
                                 <p class="text-[7px] text-uoc-sky font-black uppercase text-center border-b border-white/10 pb-1">Procés</p>
                                 <div class="dashboard-item">
-                                    <p class="text-[6px] text-white/40 uppercase">Lliurades</p>
-                                    <p class="text-[10px] font-bold">42.120</p>
+                                    <p class="text-[6px] text-white/40 uppercase">Proves convocades</p>
+                                    <p class="text-[10px] font-bold">67.750</p>
                                 </div>
                                 <div class="dashboard-item">
-                                    <p class="text-[6px] text-white/40 uppercase">Correcció</p>
-                                    <p class="text-[10px] font-bold">12%</p>
+                                    <p class="text-[6px] text-white/40 uppercase">% proves lliurades</p>
+                                    <p class="text-[10px] font-bold">32%</p>
                                 </div>
                             </div>
                             <!-- Columna 2: Atenció -->
                             <div class="space-y-2">
                                 <p class="text-[7px] text-uoc-sky font-black uppercase text-center border-b border-white/10 pb-1">Atenció</p>
                                 <div class="dashboard-item">
-                                    <p class="text-[6px] text-white/40 uppercase">Consultes</p>
+                                    <p class="text-[6px] text-white/40 uppercase">Casos</p>
                                     <p class="text-[10px] font-bold">154</p>
                                 </div>
                                 <div class="dashboard-item">
-                                    <p class="text-[6px] text-white/40 uppercase">T. Resposta</p>
-                                    <p class="text-[10px] font-bold">4'</p>
+                                    <p class="text-[6px] text-white/40 uppercase">Satisfacció CSAT</p>
+                                    <p class="text-[10px] font-bold">4.8/5</p>
                                 </div>
                             </div>
                             <!-- Columna 3: Tecnologia -->
@@ -397,7 +418,7 @@
                                 description: "Acompanya als estudiants durant la realització de les proves per atendre les seves peticions de suport a través del xat, el telèfon i l'entorn virtual. Informa als estudiants sobre les qüestions que els hi puguin afectar durant la realització de les proves." 
                             },
                             { 
-                                title: "Acadèmia", 
+                                title: "Gestió de programes", 
                                 description: "Activa dues línies de suport: una per als estudis i una altra per a l’operatiu de gestió. Ofereix suport tècnic síncron i no presencial als equips de PDI de guàrdia, per resoldre incidències i garantir el seguiment de les indicacions. En paral·lel, dona suport presencial a l’operatiu amb dos persones al matí i dos a la tarda, que supervisen el dispositiu i faciliten la coordinació amb els equips online." 
                             }
                         ]
@@ -433,7 +454,8 @@
             const contentArea = document.getElementById('content-area');
 
             document.querySelectorAll('.floor-card').forEach(c => c.classList.remove('floor-active'));
-            document.getElementById(`floor-btn-${id}`).classList.add('floor-active');
+            const activeBtn = document.getElementById(`floor-btn-${id}`);
+            if (activeBtn) activeBtn.classList.add('floor-active');
 
             defaultView.classList.add('hidden');
             dynamicView.classList.remove('hidden');
@@ -527,7 +549,8 @@
         }
 
         function updateClock() {
-            document.getElementById('real-time-clock').innerText = new Date().toLocaleTimeString('ca-ES');
+            const clockEl = document.getElementById('real-time-clock');
+            if(clockEl) clockEl.innerText = new Date().toLocaleTimeString('ca-ES');
         }
 
         setInterval(updateClock, 1000);
@@ -536,3 +559,4 @@
     </script>
 </body>
 </html>
+
