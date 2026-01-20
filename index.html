@@ -40,7 +40,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.7) saturate(1.2);
+            filter: brightness(0.8) saturate(1.1);
             transition: all 0.6s ease;
             z-index: 0;
         }
@@ -48,7 +48,7 @@
         .floor-card .overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0,0,50,0.8) 0%, rgba(0,0,50,0.2) 50%, transparent 100%);
+            background: linear-gradient(to top, rgba(0,0,50,0.85) 0%, rgba(0,0,50,0.2) 60%, transparent 100%);
             z-index: 1;
             transition: all 0.4s ease;
         }
@@ -163,7 +163,7 @@
         }
 
         .zone-open .zone-body {
-            max-height: 1200px;
+            max-height: 2000px;
             border-top: 1px solid #f1f5f9;
         }
 
@@ -182,6 +182,14 @@
         .service-card:hover {
             transform: translateY(-2px);
             border-color: var(--uoc-sky);
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.4s ease forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -215,11 +223,9 @@
                     </div>
                     
                     <div class="data-content pt-2 space-y-4">
-                        <!-- Títol 01. CONTEXT GLOBAL -->
                         <div class="px-1 pt-2">
                             <h2 class="text-[10px] font-black text-[#73edff] uppercase tracking-[0.15em] italic">01. CONTEXT GLOBAL</h2>
                         </div>
-
                         <div class="grid grid-cols-2 gap-2">
                             <div class="dashboard-item">
                                 <p class="text-[6px] text-white/40 uppercase">Programes</p>
@@ -239,13 +245,10 @@
                             </div>
                         </div>
 
-                        <!-- Títol 02. MODELS D'AVALUACIÓ -->
                         <div class="px-1 pt-2 border-t border-white/10">
-                            <h2 class="text-[10px] font-black text-[#73edff] uppercase tracking-[0.15em] italic">02. MODELS D'AVALUACIÓ</h2>
+                            <h2 class="text-[10px] font-black text-[#73edff] uppercase tracking-[0.15em] italic">02. MODELS D'AVALUACIÉ</h2>
                         </div>
-
                         <div class="bg-white/5 p-3 rounded-xl space-y-2 border border-white/10">
-                            <p class="text-[8px] font-black text-uoc-sky uppercase tracking-tighter mb-2">Tipus de Model d'Avaluació</p>
                             <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
                                 <span class="text-[10px] font-bold uppercase text-white/60">Sense prova final</span>
                                 <span class="text-[12px] font-black italic text-white/60">61%</span>
@@ -262,49 +265,40 @@
                                 <p class="text-[10px] font-bold text-white/80">Del 39% amb PAF:</p>
                                 <div class="grid grid-cols-1 gap-2 mt-1">
                                     <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center">
-                                        <div>
-                                            <p class="text-[6px] text-white/40 uppercase">Superen AC</p>
-                                            <p class="text-[10px] font-bold">20% <span class="text-[8px] font-normal lowercase opacity-60 ml-1">exempts</span></p>
-                                        </div>
-                                        <i class="fas fa-user-check text-uoc-sky/40 text-[10px]"></i>
+                                        <p class="text-[8px] text-white/40 uppercase">Superen AC (Exempts)</p>
+                                        <p class="text-[10px] font-bold">20%</p>
                                     </div>
                                     <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center">
-                                        <div>
-                                            <p class="text-[6px] text-white/40 uppercase">No aproven AC</p>
-                                            <p class="text-[10px] font-bold">8% <span class="text-[8px] font-normal lowercase opacity-60 ml-1">sense dret</span></p>
-                                        </div>
-                                        <i class="fas fa-user-times text-red-400/40 text-[10px]"></i>
+                                        <p class="text-[8px] text-white/40 uppercase">No aproven AC (Sense dret)</p>
+                                        <p class="text-[10px] font-bold">8%</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="relative">
                                 <div class="flow-dot" style="background-color: #fff;"></div>
-                                <p class="text-[11px] font-black text-uoc-sky uppercase italic">72% han de fer la prova</p>
+                                <p class="text-[11px] font-black text-uoc-sky uppercase italic text-center py-1">72% han de fer la prova</p>
                             </div>
                         </div>
 
-                        <!-- Títol 03. PROVES FINALS -->
                         <div class="px-1 pt-2 border-t border-white/10">
                             <h2 class="text-[10px] font-black text-[#73edff] uppercase tracking-[0.15em] italic">03. PROVES FINALS</h2>
                         </div>
-
-                        <div class="bg-uoc-sky/10 border border-uoc-sky/30 p-3 rounded-xl">
-                            <p class="text-center text-xl font-black italic">67.750</p>
-                            <p class="text-[6px] text-center text-uoc-sky uppercase font-bold">Proves convocades</p>
-                            
-                            <div class="grid grid-cols-1 gap-2 mt-4 pt-2 border-t border-uoc-sky/20">
-                                <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
-                                    <p class="text-[8px] text-white/40 uppercase leading-none">Proves tradicionals síncrones</p>
-                                    <p class="text-[10px] font-bold ml-2">46.000</p>
-                                </div>
-                                <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
-                                    <p class="text-[8px] text-white/40 uppercase leading-none">Nou model proves Canvas asíncrones</p>
-                                    <p class="text-[10px] font-bold ml-2">16.250</p>
-                                </div>
-                                <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
-                                    <p class="text-[8px] text-white/40 uppercase leading-none">Proves presencials FP</p>
-                                    <p class="text-[10px] font-bold ml-2">5.500</p>
-                                </div>
+                        <div class="bg-uoc-sky/10 border border-uoc-sky/30 p-3 rounded-xl text-center mb-4">
+                            <p class="text-xl font-black italic">67.750</p>
+                            <p class="text-[6px] text-uoc-sky uppercase font-bold">Proves convocades</p>
+                        </div>
+                        <div class="grid grid-cols-1 gap-2">
+                            <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center">
+                                <p class="text-[8px] text-white/60 uppercase">Tradicionals síncrones</p>
+                                <p class="text-[10px] font-bold">46.000</p>
+                            </div>
+                            <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center">
+                                <p class="text-[8px] text-white/60 uppercase">Canvas asíncrones</p>
+                                <p class="text-[10px] font-bold">16.250</p>
+                            </div>
+                            <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center border border-white/5">
+                                <p class="text-[8px] text-white/60 uppercase">Presencials FP</p>
+                                <p class="text-[10px] font-bold">5.500</p>
                             </div>
                         </div>
                     </div>
@@ -321,43 +315,43 @@
                     </div>
                     <div class="data-content pt-2">
                         <div class="grid grid-cols-3 gap-2">
-                            <!-- Columna 1: Procés -->
+                            <!-- Columna Procés -->
                             <div class="space-y-2">
-                                <p class="text-[7px] text-uoc-sky font-black uppercase text-center border-b border-white/10 pb-1">Procés</p>
+                                <p class="text-[7px] font-black text-uoc-sky uppercase text-center mb-1">Procés</p>
                                 <div class="dashboard-item">
-                                    <p class="text-[6px] text-white/40 uppercase">Proves convocades</p>
-                                    <p class="text-[10px] font-bold">67.750</p>
+                                    <p class="text-[5px] text-white/40 uppercase">Estat Global</p>
+                                    <p class="text-[10px] font-bold">98.2%</p>
                                 </div>
                                 <div class="dashboard-item">
-                                    <p class="text-[6px] text-white/40 uppercase">% proves lliurades</p>
-                                    <p class="text-[10px] font-bold">32%</p>
+                                    <p class="text-[5px] text-white/40 uppercase">Planificació</p>
+                                    <p class="text-[10px] font-bold">OK</p>
                                 </div>
                             </div>
-                            <!-- Columna 2: Atenció -->
+                            <!-- Columna Atenció -->
                             <div class="space-y-2">
-                                <p class="text-[7px] text-uoc-sky font-black uppercase text-center border-b border-white/10 pb-1">Atenció</p>
+                                <p class="text-[7px] font-black text-uoc-sky uppercase text-center mb-1">Atenció</p>
                                 <div class="dashboard-item">
-                                    <p class="text-[6px] text-white/40 uppercase">Casos</p>
-                                    <p class="text-[10px] font-bold">154</p>
+                                    <p class="text-[5px] text-white/40 uppercase">T. Resposta</p>
+                                    <p class="text-[10px] font-bold">2.4m</p>
                                 </div>
                                 <div class="dashboard-item">
-                                    <p class="text-[6px] text-white/40 uppercase">Satisfacció CSAT</p>
-                                    <p class="text-[10px] font-bold">4.8/5</p>
+                                    <p class="text-[5px] text-white/40 uppercase">Resolució</p>
+                                    <p class="text-[10px] font-bold">94%</p>
                                 </div>
                             </div>
-                            <!-- Columna 3: Tecnologia -->
+                            <!-- Columna Tecnologia -->
                             <div class="space-y-2">
-                                <p class="text-[7px] text-uoc-sky font-black uppercase text-center border-b border-white/10 pb-1">Tecnologia</p>
+                                <p class="text-[7px] font-black text-uoc-sky uppercase text-center mb-1">Tecnologia</p>
                                 <div class="dashboard-item">
-                                    <p class="text-[6px] text-white/40 uppercase">Sistemes</p>
+                                    <p class="text-[5px] text-white/40 uppercase">Uptime</p>
+                                    <p class="text-[10px] font-bold">99.9%</p>
+                                </div>
+                                <div class="dashboard-item">
+                                    <p class="text-[5px] text-white/40 uppercase">Sistemes</p>
                                     <div class="flex items-center space-x-1">
                                         <p class="text-[10px] font-bold">OK</p>
                                         <div class="w-1 h-1 bg-green-400 rounded-full status-pulse"></div>
                                     </div>
-                                </div>
-                                <div class="dashboard-item">
-                                    <p class="text-[6px] text-white/40 uppercase">Incidències</p>
-                                    <p class="text-[10px] font-bold text-uoc-sky">0</p>
                                 </div>
                             </div>
                         </div>
@@ -395,24 +389,22 @@
                 title: "Edifici O", 
                 icon: "fa-clipboard-list", 
                 image: "edifici_o.jpg", 
-                desc: "",
+                desc: null,
                 hasAccordionZones: true,
                 zones: [
-                    {
-                        id: "z-muntanya",
-                        name: "Zona Muntanya",
-                        icon: "fa-mountain",
-                        services: [
-                            { title: "Coordinació", description: "L'equip de Coordinació orquestra totes les peces del dispositiu, assegurant que els diferents equips treballin de manera síncrona." },
-                            { title: "Tecnologia", description: "Optimització de les plataformes digitals i suport d'infraestructura per a la correcta recepció de les proves." },
-                            { title: "Atenció Xat (Extern)", description: "Comunicació immediata per a dubtes tècnics sobre les plataformes de proves asíncrones o síncrones." }
-                        ]
-                    },
                     {
                         id: "z-mar",
                         name: "Zona Mar",
                         icon: "fa-water",
                         services: [
+                            { 
+                                title: "Serveis acadèmics", 
+                                description: "(Definició pendent d'assignar)" 
+                            },
+                            { 
+                                title: "Tecnologia", 
+                                description: "(Definició pendent d'assignar)" 
+                            },
                             { 
                                 title: "Atenció a l'estudiant", 
                                 description: "Acompanya als estudiants durant la realització de les proves per atendre les seves peticions de suport a través del xat, el telèfon i l'entorn virtual. Informa als estudiants sobre les qüestions que els hi puguin afectar durant la realització de les proves." 
@@ -420,19 +412,41 @@
                             { 
                                 title: "Gestió de programes", 
                                 description: "Activa dues línies de suport: una per als estudis i una altra per a l’operatiu de gestió. Ofereix suport tècnic síncron i no presencial als equips de PDI de guàrdia, per resoldre incidències i garantir el seguiment de les indicacions. En paral·lel, dona suport presencial a l’operatiu amb dos persones al matí i dos a la tarda, que supervisen el dispositiu i faciliten la coordinació amb els equips online." 
+                            },
+                            { 
+                                title: "Atenció xat - Extern", 
+                                description: "(Definició pendent d'assignar)" 
+                            }
+                        ]
+                    },
+                    {
+                        id: "z-muntanya",
+                        name: "Zona Muntanya",
+                        icon: "fa-mountain",
+                        services: [
+                            { 
+                                title: "Atenció 2n nivell - Extern", 
+                                description: "(Definició pendent d'assignar)" 
                             }
                         ]
                     }
                 ]
             },
-            'U': { 
+            'C': { 
                 label: "Zona Grafana", 
-                title: "Edifici U", 
+                title: "Edifici C", 
                 icon: "fa-network-wired", 
-                image: "edifici_u.jpg", 
+                image: "edifici_c.jpg", 
                 desc: "Monitoratge de xarxa i suport tecnològic crític. Aquí es visualitzen els fluxos de dades i s'ofereix suport directe durant les proves.",
                 hasAccordionZones: false,
-                zones: [] 
+                zones: [
+                    {
+                        services: [
+                            { title: "Monitoratge en Temps Real", description: "Visualització de l'estat dels servidors i fluxos de dades de lliurament de proves mitjançant dashboards de Grafana." },
+                            { title: "Equip de Sistemes", description: "Intervenció immediata en cas de pics de trànsit o anomalies en la connectivitat de les plataformes." }
+                        ]
+                    }
+                ] 
             }
         };
 
@@ -474,7 +488,7 @@
                                 <i class="fas fa-chevron-down text-[10px] text-slate-300 transition-transform duration-300 chevron-icon"></i>
                             </div>
                             <div class="zone-body p-6">
-                                <div class="grid grid-cols-1 gap-6">
+                                <div class="grid grid-cols-1 gap-4">
                                     ${zone.services.map(service => `
                                         <div class="service-card">
                                             <h5 class="text-[10px] font-black text-uoc-blue uppercase mb-2 flex items-center">
@@ -508,12 +522,12 @@
 
             dynamicView.innerHTML = `
                 <div class="space-y-6 animate-fadeIn">
-                    <div class="relative h-44 w-full rounded-2xl overflow-hidden shadow-sm border-4 border-white">
+                    <div class="relative h-56 w-full rounded-2xl overflow-hidden shadow-sm border-4 border-white">
                         <img src="${data.image}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/800x400?text=${data.label}'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#000078]/80 via-transparent to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#000078]/90 via-transparent to-transparent"></div>
                         <div class="absolute bottom-4 left-6 text-white">
                             <span class="text-[10px] font-black text-uoc-sky/80 uppercase tracking-widest block mb-1">${data.label}</span>
-                            <h2 class="text-xl font-black uppercase tracking-tight">${data.title}</h2>
+                            <h2 class="text-2xl font-black uppercase tracking-tight">${data.title}</h2>
                         </div>
                     </div>
                     ${descriptionHTML}
@@ -559,4 +573,3 @@
     </script>
 </body>
 </html>
-
