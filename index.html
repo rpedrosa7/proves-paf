@@ -198,7 +198,8 @@
     <header class="bg-white border-b-4 border-[#000078] sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Logo_UOC.svg/1200px-Logo_UOC.svg.png" alt="UOC" class="uoc-logo">
+                <!-- Restaurat el logo.png adjuntat -->
+                <img src="logo.png" alt="UOC" class="uoc-logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Logo_UOC.svg/2560px-Logo_UOC.svg.png'">
             </div>
             <div id="real-time-clock" class="font-mono text-sm font-bold text-[#000078] bg-slate-100 px-4 py-2 rounded-full border border-slate-200">
                 00:00:00
@@ -246,7 +247,7 @@
                         </div>
 
                         <div class="px-1 pt-2 border-t border-white/10">
-                            <h2 class="text-[10px] font-black text-[#73edff] uppercase tracking-[0.15em] italic">02. MODELS D'AVALUACIÉ</h2>
+                            <h2 class="text-[10px] font-black text-[#73edff] uppercase tracking-[0.15em] italic">02. MODELS D'AVALUACIÓ</h2>
                         </div>
                         <div class="bg-white/5 p-3 rounded-xl space-y-2 border border-white/10">
                             <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
@@ -387,36 +388,21 @@
             'O': { 
                 label: "Seu Central", 
                 title: "Edifici O", 
+                subtitle: null,
                 icon: "fa-clipboard-list", 
-                image: "edifici_o.jpg", 
-                desc: null,
-                hasAccordionZones: true,
+                image: "edifici_o.jpg", // Restaurada imatge adjunta
+                layout: 'accordion',
                 zones: [
                     {
                         id: "z-mar",
                         name: "Zona Mar",
                         icon: "fa-water",
                         services: [
-                            { 
-                                title: "Serveis acadèmics", 
-                                description: "(Definició pendent d'assignar)" 
-                            },
-                            { 
-                                title: "Tecnologia", 
-                                description: "(Definició pendent d'assignar)" 
-                            },
-                            { 
-                                title: "Atenció a l'estudiant", 
-                                description: "Acompanya als estudiants durant la realització de les proves per atendre les seves peticions de suport a través del xat, el telèfon i l'entorn virtual. Informa als estudiants sobre les qüestions que els hi puguin afectar durant la realització de les proves." 
-                            },
-                            { 
-                                title: "Gestió de programes", 
-                                description: "Activa dues línies de suport: una per als estudis i una altra per a l’operatiu de gestió. Ofereix suport tècnic síncron i no presencial als equips de PDI de guàrdia, per resoldre incidències i garantir el seguiment de les indicacions. En paral·lel, dona suport presencial a l’operatiu amb dos persones al matí i dos a la tarda, que supervisen el dispositiu i faciliten la coordinació amb els equips online." 
-                            },
-                            { 
-                                title: "Atenció xat - Extern", 
-                                description: "(Definició pendent d'assignar)" 
-                            }
+                            { title: "Serveis acadèmics", description: "(Definició pendent d'assignar)" },
+                            { title: "Tecnologia", description: "(Definició pendent d'assignar)" },
+                            { title: "Atenció a l'estudiant", description: "Acompanya als estudiants durant la realització de les proves per atendre les seves peticions de suport a través del xat, el telèfon i l'entorn virtual. Informa als estudiants sobre les qüestions que els hi puguin afectar durant la realització de les proves." },
+                            { title: "Gestió de programes", description: "Activa dues línies de suport: una per als estudis i una altra per a l’operatiu de gestió. Ofereix suport tècnic síncron i no presencial als equips de PDI de guàrdia, per resoldre incidències i garantir el seguiment de les indicacions. En paral·lel, dona suport presencial a l’operatiu amb dos persones al matí i dos a la tarda, que supervisen el dispositiu i faciliten la coordinació amb els equips online." },
+                            { title: "Atenció xat - Extern", description: "(Definició pendent d'assignar)" }
                         ]
                     },
                     {
@@ -424,34 +410,30 @@
                         name: "Zona Muntanya",
                         icon: "fa-mountain",
                         services: [
-                            { 
-                                title: "Atenció 2n nivell - Extern", 
-                                description: "(Definició pendent d'assignar)" 
-                            }
+                            { title: "Atenció 2n nivell - Extern", description: "(Definició pendent d'assignar)" }
                         ]
                     }
                 ]
             },
-            'C': { 
-                label: "Zona Grafana", 
-                title: "Edifici C", 
+            'U': { 
+                label: "Zona Suport Extern", 
+                title: "Edifici U", 
+                subtitle: "Zona Grafana",
                 icon: "fa-network-wired", 
-                image: "edifici_c.jpg", 
-                desc: "Monitoratge de xarxa i suport tecnològic crític. Aquí es visualitzen els fluxos de dades i s'ofereix suport directe durant les proves.",
-                hasAccordionZones: false,
-                zones: [
-                    {
-                        services: [
-                            { title: "Monitoratge en Temps Real", description: "Visualització de l'estat dels servidors i fluxos de dades de lliurament de proves mitjançant dashboards de Grafana." },
-                            { title: "Equip de Sistemes", description: "Intervenció immediata en cas de pics de trànsit o anomalies en la connectivitat de les plataformes." }
-                        ]
+                image: "edifici_c.jpg", // Restaurada imatge adjunta
+                layout: 'simple',
+                services: [
+                    { 
+                        title: "Atenció 2n nivell - Extern", 
+                        description: "Monitoratge en temps real mitjançant panells de control per garantir l'estabilitat del servei durant les franges de màxima activitat." 
                     }
                 ] 
             }
         };
 
         function toggleAccordion(id) {
-            document.getElementById(id).classList.toggle('data-active');
+            const el = document.getElementById(id);
+            if(el) el.classList.toggle('data-active');
         }
 
         function toggleZone(zoneId) {
@@ -474,11 +456,12 @@
             defaultView.classList.add('hidden');
             dynamicView.classList.remove('hidden');
 
-            let zonesHTML = '';
-            if (data.hasAccordionZones && data.zones.length > 0) {
-                zonesHTML = `<div class="mt-6 space-y-4">`;
+            let contentHTML = '';
+            
+            if (data.layout === 'accordion') {
+                contentHTML = `<div class="mt-6 space-y-4">`;
                 data.zones.forEach(zone => {
-                    zonesHTML += `
+                    contentHTML += `
                         <div id="${zone.id}" class="zone-accordion">
                             <div class="zone-header" onclick="toggleZone('${zone.id}')">
                                 <div class="flex items-center space-x-3 text-[#000078]">
@@ -502,36 +485,40 @@
                             </div>
                         </div>`;
                 });
-                zonesHTML += `</div>`;
-            } else if (!data.hasAccordionZones && data.zones && data.zones.length > 0) {
-                zonesHTML = `<div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">`;
-                data.zones[0].services.forEach(service => {
-                    zonesHTML += `
-                        <div class="service-card bg-slate-50 border-none">
-                            <h5 class="text-xs font-black text-uoc-blue uppercase mb-2">${service.title}</h5>
-                            <p class="text-[11px] leading-relaxed text-slate-500">${service.description}</p>
+                contentHTML += `</div>`;
+            } else {
+                contentHTML = `<div class="mt-6 space-y-4">`;
+                data.services.forEach(service => {
+                    contentHTML += `
+                        <div class="service-card bg-slate-50 border-2 border-slate-100 p-8">
+                            <h5 class="text-xs font-black text-uoc-blue uppercase mb-4 tracking-wider flex items-center">
+                                <i class="fas fa-info-circle mr-2 text-uoc-sky"></i>
+                                ${service.title}
+                            </h5>
+                            <p class="text-sm leading-relaxed text-slate-500 font-medium">
+                                ${service.description}
+                            </p>
                         </div>`;
                 });
-                zonesHTML += `</div>`;
+                contentHTML += `</div>`;
             }
 
-            const descriptionHTML = data.desc ? `
-                <div class="bg-[#000078]/5 p-5 rounded-2xl border border-[#000078]/10">
-                     <p class="text-slate-700 text-xs leading-relaxed font-semibold">${data.desc}</p>
-                </div>` : '';
+            const subtitleHTML = data.subtitle ? `
+                <span class="text-[11px] font-black text-uoc-sky uppercase tracking-[0.2em] block -mt-1 mb-2">${data.subtitle}</span>
+            ` : '';
 
             dynamicView.innerHTML = `
                 <div class="space-y-6 animate-fadeIn">
                     <div class="relative h-56 w-full rounded-2xl overflow-hidden shadow-sm border-4 border-white">
-                        <img src="${data.image}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/800x400?text=${data.label}'">
+                        <img src="${data.image}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/800x400?text=${data.title}'">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#000078]/90 via-transparent to-transparent"></div>
                         <div class="absolute bottom-4 left-6 text-white">
                             <span class="text-[10px] font-black text-uoc-sky/80 uppercase tracking-widest block mb-1">${data.label}</span>
                             <h2 class="text-2xl font-black uppercase tracking-tight">${data.title}</h2>
+                            ${subtitleHTML}
                         </div>
                     </div>
-                    ${descriptionHTML}
-                    ${zonesHTML}
+                    ${contentHTML}
                 </div>`;
 
             if (window.innerWidth < 1024) {
@@ -541,7 +528,9 @@
 
         function renderFloorButtons() {
             const list = document.getElementById('floor-list');
+            if (!list) return;
             list.innerHTML = '';
+            
             Object.keys(buildingData).forEach(id => {
                 const data = buildingData[id];
                 const btn = document.createElement('div');
@@ -567,9 +556,13 @@
             if(clockEl) clockEl.innerText = new Date().toLocaleTimeString('ca-ES');
         }
 
-        setInterval(updateClock, 1000);
-        updateClock();
-        window.onload = renderFloorButtons;
+        window.onload = function() {
+            renderFloorButtons();
+            setInterval(updateClock, 1000);
+            updateClock();
+        };
+        
+        renderFloorButtons();
     </script>
 </body>
 </html>
