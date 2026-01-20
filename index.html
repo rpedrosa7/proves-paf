@@ -22,7 +22,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Targetes d'edifici amb fons d'imatge */
         .floor-card {
             height: 150px;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -66,7 +65,6 @@
             transform: scale(1.05);
         }
 
-        /* Acordions de dades */
         .data-accordion-card {
             transition: all 0.4s ease;
             cursor: pointer;
@@ -93,7 +91,6 @@
             margin-top: 1rem;
         }
 
-        /* Dashboard Items */
         .dashboard-item {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 0.75rem;
@@ -105,12 +102,11 @@
             animation: pulse 2s infinite;
         }
         @keyframes pulse {
-            0 { transform: scale(0.9); opacity: 0.5; }
+            0% { transform: scale(0.9); opacity: 0.5; }
             70% { transform: scale(1.2); opacity: 1; }
             100% { transform: scale(0.9); opacity: 0.5; }
         }
 
-        /* Flux de dades */
         .flow-line {
             position: relative;
             padding-left: 1.5rem;
@@ -131,6 +127,58 @@
             width: auto;
             display: block;
         }
+
+        .zone-accordion {
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            overflow: hidden;
+            background: white;
+            transition: all 0.3s ease;
+            margin-bottom: 0.75rem;
+        }
+
+        .zone-header {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            user-select: none;
+        }
+
+        .zone-header:hover {
+            background: #f1f5f9;
+        }
+
+        .zone-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+        }
+
+        .zone-open .zone-body {
+            max-height: 1200px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .zone-open .chevron-icon {
+            transform: rotate(180deg);
+        }
+
+        .service-card {
+            background: #fbfcfd;
+            border: 1px solid #edf2f7;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            transition: transform 0.2s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--uoc-sky);
+        }
     </style>
 </head>
 <body>
@@ -138,7 +186,7 @@
     <header class="bg-white border-b-4 border-[#000078] sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center">
-                <img src="logo.png" alt="UOC - Universitat Oberta de Catalunya" class="uoc-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Logo_UOC.svg/1200px-Logo_UOC.svg.png" alt="UOC" class="uoc-logo">
             </div>
             <div id="real-time-clock" class="font-mono text-sm font-bold text-[#000078] bg-slate-100 px-4 py-2 rounded-full border border-slate-200">
                 00:00:00
@@ -148,11 +196,11 @@
 
     <main class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- Columna Esquerra -->
+        <!-- Columna Esquerra: Estadístiques i Navegació -->
         <div class="lg:col-span-4 space-y-4">
             
-            <!-- Acordions de dades generals -->
             <div class="space-y-3">
+                <!-- PAF EN XIFRES -->
                 <section id="paf-stats" class="data-accordion-card rounded-2xl p-4 text-white shadow-lg" onclick="toggleAccordion('paf-stats')">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-3">
@@ -201,14 +249,14 @@
                                     <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center">
                                         <div>
                                             <p class="text-[6px] text-white/40 uppercase">Superen AC</p>
-                                            <p class="text-[10px] font-bold">20% <span class="text-[8px] font-normal lowercase opacity-60 ml-1">exempts prova final</span></p>
+                                            <p class="text-[10px] font-bold">20% <span class="text-[8px] font-normal lowercase opacity-60 ml-1">exempts</span></p>
                                         </div>
                                         <i class="fas fa-user-check text-uoc-sky/40 text-[10px]"></i>
                                     </div>
                                     <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center">
                                         <div>
                                             <p class="text-[6px] text-white/40 uppercase">No aproven AC</p>
-                                            <p class="text-[10px] font-bold">8% <span class="text-[8px] font-normal lowercase opacity-60 ml-1">no poden fer la prova final</span></p>
+                                            <p class="text-[10px] font-bold">8% <span class="text-[8px] font-normal lowercase opacity-60 ml-1">sense dret</span></p>
                                         </div>
                                         <i class="fas fa-user-times text-red-400/40 text-[10px]"></i>
                                     </div>
@@ -218,18 +266,21 @@
                                 <div class="flow-dot" style="background-color: #fff;"></div>
                                 <p class="text-[11px] font-black text-uoc-sky uppercase italic">72% han de fer la prova</p>
                                 <div class="bg-uoc-sky/10 border border-uoc-sky/30 p-3 rounded-xl mt-2">
-                                    <p class="text-center text-xl font-black italic">69.500</p>
+                                    <p class="text-center text-xl font-black italic">67.750</p>
                                     <p class="text-[6px] text-center text-uoc-sky uppercase font-bold">Proves convocades</p>
                                     
                                     <div class="grid grid-cols-1 gap-2 mt-4 pt-2 border-t border-uoc-sky/20">
                                         <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
-                                            <p class="text-[8px] text-white/40 uppercase leading-none">46.000 Proves tradicionals síncrones</p>
+                                            <p class="text-[8px] text-white/40 uppercase leading-none">Proves tradicionals síncrones</p>
+                                            <p class="text-[10px] font-bold ml-2">46.000</p>
                                         </div>
                                         <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
-                                            <p class="text-[8px] text-white/40 uppercase leading-none">16.250 Nou model proves Canvas asíncrones</p>
+                                            <p class="text-[8px] text-white/40 uppercase leading-none">Nou model proves Canvas asíncrones</p>
+                                            <p class="text-[10px] font-bold ml-2">16.250</p>
                                         </div>
                                         <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
-                                            <p class="text-[8px] text-white/40 uppercase leading-none">6.750 Proves presencials FP</p>
+                                            <p class="text-[8px] text-white/40 uppercase leading-none">Proves presencials FP</p>
+                                            <p class="text-[10px] font-bold ml-2">5.500</p>
                                         </div>
                                     </div>
                                 </div>
@@ -238,6 +289,7 @@
                     </div>
                 </section>
 
+                <!-- QUADRE DE COMANDAMENT -->
                 <section id="dashboard" class="data-accordion-card rounded-2xl p-4 text-white shadow-lg" onclick="toggleAccordion('dashboard')">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-3">
@@ -248,6 +300,7 @@
                     </div>
                     <div class="data-content pt-2">
                         <div class="grid grid-cols-3 gap-2">
+                            <!-- Columna 1: Procés -->
                             <div class="space-y-2">
                                 <p class="text-[7px] text-uoc-sky font-black uppercase text-center border-b border-white/10 pb-1">Procés</p>
                                 <div class="dashboard-item">
@@ -259,6 +312,7 @@
                                     <p class="text-[10px] font-bold">12%</p>
                                 </div>
                             </div>
+                            <!-- Columna 2: Atenció -->
                             <div class="space-y-2">
                                 <p class="text-[7px] text-uoc-sky font-black uppercase text-center border-b border-white/10 pb-1">Atenció</p>
                                 <div class="dashboard-item">
@@ -270,6 +324,7 @@
                                     <p class="text-[10px] font-bold">4'</p>
                                 </div>
                             </div>
+                            <!-- Columna 3: Tecnologia -->
                             <div class="space-y-2">
                                 <p class="text-[7px] text-uoc-sky font-black uppercase text-center border-b border-white/10 pb-1">Tecnologia</p>
                                 <div class="dashboard-item">
@@ -289,45 +344,86 @@
                 </section>
             </div>
 
-            <!-- Navegació d'espais -->
             <div class="pt-2">
-                <h2 class="text-[10px] font-black text-slate-400 uppercase mb-4 tracking-[0.2em] px-2">Explora els espais</h2>
-                <div id="floor-list" class="space-y-4">
-                    <!-- Es carrega mitjançant renderFloorButtons() -->
-                </div>
+                <h2 class="text-[10px] font-black text-slate-400 uppercase mb-4 tracking-[0.2em] px-2 text-center lg:text-left">Explora els espais</h2>
+                <div id="floor-list" class="space-y-4"></div>
             </div>
         </div>
 
-        <!-- Columna Dreta -->
+        <!-- Columna Dreta: Detalls de l'espai -->
         <div class="lg:col-span-8">
-            <div id="content-area" class="bg-white rounded-3xl shadow-sm border border-slate-200 min-h-[600px] p-6 md:p-10 flex flex-col relative transition-all duration-500 overflow-hidden">
+            <div id="content-area" class="bg-white rounded-3xl shadow-sm border border-slate-200 min-h-[650px] p-6 md:p-10 flex flex-col relative transition-all duration-500 overflow-hidden">
                 <div id="default-view" class="h-full flex flex-col items-center justify-center text-center space-y-6 py-20">
                     <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center border border-slate-100">
                         <i class="fas fa-map-marked-alt text-slate-200 text-3xl"></i>
                     </div>
                     <div>
                         <h2 class="text-[#000078] font-black text-xl uppercase tracking-tight mb-2">Benvingut a l'itinerari</h2>
-                        <p class="text-slate-400 text-sm max-w-sm mx-auto">Seleccioneu un edifici per veure'n els detalls i la informació del servei.</p>
+                        <p class="text-slate-400 text-sm max-w-sm mx-auto">Seleccioneu un espai per veure'n els detalls i la informació del dispositiu.</p>
                     </div>
                 </div>
-                <div id="dynamic-view" class="hidden animate-fadeIn h-full"></div>
+                <div id="dynamic-view" class="hidden h-full"></div>
             </div>
         </div>
     </main>
 
-    <footer class="py-10 text-center opacity-30">
-        <p class="text-[#000078] text-[9px] font-black uppercase tracking-[0.5em]">Universitat Oberta de Catalunya</p>
-    </footer>
-
     <script>
         const buildingData = {
-            'U': { label: "Edifici U", title: "Atenció i Control (NOC)", icon: "fa-network-wired", image: "edifici_u.jpg", desc: "Monitoratge de xarxa i suport tecnològic crític durant les proves finals." },
-            'O': { label: "Edifici O", title: "Logística Acadèmica", icon: "fa-clipboard-list", image: "edifici_o.jpg", desc: "Gestió administrativa de les proves, tribunals i documentació." },
-            'C': { label: "Edifici C", title: "Innovació Educativa", icon: "fa-lightbulb", image: "edifici_c.jpg", desc: "Noves metodologies d'avaluació i millora de la qualitat docent." }
+            'O': { 
+                label: "Seu Central", 
+                title: "Edifici O", 
+                icon: "fa-clipboard-list", 
+                image: "edifici_o.jpg", 
+                desc: "",
+                hasAccordionZones: true,
+                zones: [
+                    {
+                        id: "z-muntanya",
+                        name: "Zona Muntanya",
+                        icon: "fa-mountain",
+                        services: [
+                            { title: "Coordinació", description: "L'equip de Coordinació orquestra totes les peces del dispositiu, assegurant que els diferents equips treballin de manera síncrona." },
+                            { title: "Tecnologia", description: "Optimització de les plataformes digitals i suport d'infraestructura per a la correcta recepció de les proves." },
+                            { title: "Atenció Xat (Extern)", description: "Comunicació immediata per a dubtes tècnics sobre les plataformes de proves asíncrones o síncrones." }
+                        ]
+                    },
+                    {
+                        id: "z-mar",
+                        name: "Zona Mar",
+                        icon: "fa-water",
+                        services: [
+                            { 
+                                title: "Atenció a l'estudiant", 
+                                description: "Acompanya als estudiants durant la realització de les proves per atendre les seves peticions de suport a través del xat, el telèfon i l'entorn virtual. Informa als estudiants sobre les qüestions que els hi puguin afectar durant la realització de les proves." 
+                            },
+                            { 
+                                title: "Acadèmia", 
+                                description: "Activa dues línies de suport: una per als estudis i una altra per a l’operatiu de gestió. Ofereix suport tècnic síncron i no presencial als equips de PDI de guàrdia, per resoldre incidències i garantir el seguiment de les indicacions. En paral·lel, dona suport presencial a l’operatiu amb dos persones al matí i dos a la tarda, que supervisen el dispositiu i faciliten la coordinació amb els equips online." 
+                            }
+                        ]
+                    }
+                ]
+            },
+            'U': { 
+                label: "Zona Grafana", 
+                title: "Edifici U", 
+                icon: "fa-network-wired", 
+                image: "edifici_u.jpg", 
+                desc: "Monitoratge de xarxa i suport tecnològic crític. Aquí es visualitzen els fluxos de dades i s'ofereix suport directe durant les proves.",
+                hasAccordionZones: false,
+                zones: [] 
+            }
         };
 
         function toggleAccordion(id) {
             document.getElementById(id).classList.toggle('data-active');
+        }
+
+        function toggleZone(zoneId) {
+            const el = document.getElementById(zoneId);
+            const isOpen = el.classList.contains('zone-open');
+            document.querySelectorAll('.zone-accordion').forEach(acc => acc.classList.remove('zone-open'));
+            if (!isOpen) el.classList.add('zone-open');
         }
 
         function selectFloor(id) {
@@ -342,47 +438,64 @@
             defaultView.classList.add('hidden');
             dynamicView.classList.remove('hidden');
 
-            dynamicView.innerHTML = `
-                <div class="space-y-8 animate-fadeIn h-full flex flex-col">
-                    <div class="relative h-64 w-full rounded-2xl overflow-hidden shadow-lg border-4 border-white">
-                        <img src="${data.image}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/1200x600?text=${data.label}'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#000078]/90 via-transparent to-transparent"></div>
-                        <div class="absolute bottom-6 left-6 text-white">
-                            <span class="text-xs font-bold text-uoc-sky uppercase tracking-widest block mb-1">${data.label}</span>
-                            <h2 class="text-3xl font-black uppercase tracking-tight">${data.title}</h2>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 flex-grow">
-                        <div class="space-y-6">
-                            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                                <h4 class="text-[10px] font-black text-uoc-blue uppercase tracking-widest mb-4 flex items-center">
-                                    <i class="fas fa-info-circle mr-2 text-uoc-sky"></i> Missió de l'espai
-                                </h4>
-                                <p class="text-slate-700 text-sm leading-relaxed font-medium">${data.desc}</p>
+            let zonesHTML = '';
+            if (data.hasAccordionZones && data.zones.length > 0) {
+                zonesHTML = `<div class="mt-6 space-y-4">`;
+                data.zones.forEach(zone => {
+                    zonesHTML += `
+                        <div id="${zone.id}" class="zone-accordion">
+                            <div class="zone-header" onclick="toggleZone('${zone.id}')">
+                                <div class="flex items-center space-x-3 text-[#000078]">
+                                    <i class="fas ${zone.icon} text-xs opacity-50"></i>
+                                    <h4 class="text-sm font-black uppercase tracking-tight">${zone.name}</h4>
+                                </div>
+                                <i class="fas fa-chevron-down text-[10px] text-slate-300 transition-transform duration-300 chevron-icon"></i>
                             </div>
-                        </div>
-                        
-                        <div class="space-y-6">
-                            <h4 class="text-[10px] font-black text-uoc-blue uppercase tracking-widest mb-4 flex items-center">
-                                <i class="fas fa-shield-halved mr-2 text-uoc-sky"></i> Protocols d'actuació
-                            </h4>
-                            <ul class="space-y-3">
-                                <li class="flex items-center space-x-4 text-sm text-slate-600 bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
-                                    <div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-check text-green-500 text-[10px]"></i>
-                                    </div>
-                                    <span class="font-semibold text-xs">Resposta immediata davant incidències</span>
-                                </li>
-                                <li class="flex items-center space-x-4 text-sm text-slate-600 bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
-                                    <div class="w-6 h-6 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-sync text-blue-500 text-[10px]"></i>
-                                    </div>
-                                    <span class="font-semibold text-xs">Monitoratge en temps real</span>
-                                </li>
-                            </ul>
+                            <div class="zone-body p-6">
+                                <div class="grid grid-cols-1 gap-6">
+                                    ${zone.services.map(service => `
+                                        <div class="service-card">
+                                            <h5 class="text-[10px] font-black text-uoc-blue uppercase mb-2 flex items-center">
+                                                <span class="w-1.5 h-1.5 bg-uoc-sky rounded-full mr-2"></span>
+                                                ${service.title}
+                                            </h5>
+                                            <p class="text-[12px] leading-relaxed text-slate-600 font-medium">${service.description}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>`;
+                });
+                zonesHTML += `</div>`;
+            } else if (!data.hasAccordionZones && data.zones && data.zones.length > 0) {
+                zonesHTML = `<div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">`;
+                data.zones[0].services.forEach(service => {
+                    zonesHTML += `
+                        <div class="service-card bg-slate-50 border-none">
+                            <h5 class="text-xs font-black text-uoc-blue uppercase mb-2">${service.title}</h5>
+                            <p class="text-[11px] leading-relaxed text-slate-500">${service.description}</p>
+                        </div>`;
+                });
+                zonesHTML += `</div>`;
+            }
+
+            const descriptionHTML = data.desc ? `
+                <div class="bg-[#000078]/5 p-5 rounded-2xl border border-[#000078]/10">
+                     <p class="text-slate-700 text-xs leading-relaxed font-semibold">${data.desc}</p>
+                </div>` : '';
+
+            dynamicView.innerHTML = `
+                <div class="space-y-6 animate-fadeIn">
+                    <div class="relative h-44 w-full rounded-2xl overflow-hidden shadow-sm border-4 border-white">
+                        <img src="${data.image}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/800x400?text=${data.label}'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#000078]/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-6 text-white">
+                            <span class="text-[10px] font-black text-uoc-sky/80 uppercase tracking-widest block mb-1">${data.label}</span>
+                            <h2 class="text-xl font-black uppercase tracking-tight">${data.title}</h2>
                         </div>
                     </div>
+                    ${descriptionHTML}
+                    ${zonesHTML}
                 </div>`;
 
             if (window.innerWidth < 1024) {
@@ -397,16 +510,16 @@
                 const data = buildingData[id];
                 const btn = document.createElement('div');
                 btn.id = `floor-btn-${id}`;
-                btn.className = "floor-card group";
+                btn.className = "floor-card";
                 btn.onclick = () => selectFloor(id);
                 btn.innerHTML = `
-                    <img src="${data.image}" class="bg-image" onerror="this.src='https://via.placeholder.com/600x400?text=${data.label}'">
+                    <img src="${data.image}" class="bg-image" onerror="this.src='https://via.placeholder.com/400x200?text=${data.label}'">
                     <div class="overlay"></div>
                     <div class="relative z-10 h-full p-6 flex flex-col justify-end text-white">
-                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-uoc-sky mb-1 drop-shadow-md">${data.label}</span>
+                        <span class="text-[9px] font-black uppercase tracking-widest text-uoc-sky/90 mb-0.5 drop-shadow-md">${data.label}</span>
                         <div class="flex items-center space-x-3">
-                            <i class="fas ${data.icon} text-sm drop-shadow-md"></i>
-                            <h3 class="text-lg font-black tracking-tight drop-shadow-lg leading-tight">${data.title}</h3>
+                            <i class="fas ${data.icon} text-sm"></i>
+                            <h3 class="text-lg font-black tracking-tight drop-shadow-lg uppercase">${data.title}</h3>
                         </div>
                     </div>`;
                 list.appendChild(btn);
