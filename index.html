@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
-        
+       
         :root {
             --uoc-blue: #000078;
             --uoc-sky: #73edff;
@@ -16,11 +16,13 @@
             --uoc-orange: #ff6a13;
         }
 
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f1f5f9;
             scroll-behavior: smooth;
         }
+
 
         .floor-card {
             height: 150px;
@@ -34,6 +36,7 @@
             background-color: #e2e8f0;
         }
 
+
         .floor-card .bg-image {
             position: absolute;
             inset: 0;
@@ -45,6 +48,7 @@
             z-index: 0;
         }
 
+
         .floor-card .overlay {
             position: absolute;
             inset: 0;
@@ -53,6 +57,7 @@
             transition: all 0.4s ease;
         }
 
+
         .floor-active {
             height: 170px;
             border-color: var(--uoc-sky);
@@ -60,10 +65,12 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 120, 0.2);
         }
 
+
         .floor-active .bg-image {
             filter: brightness(1) saturate(1.3);
             transform: scale(1.05);
         }
+
 
         .data-accordion-card {
             transition: all 0.4s ease;
@@ -74,10 +81,12 @@
             border: 1px solid rgba(255,255,255,0.1);
         }
 
+
         .data-active {
             max-height: 2000px;
             background-color: #00005a;
         }
+
 
         .data-content {
             opacity: 0;
@@ -85,11 +94,13 @@
             transition: all 0.3s ease;
         }
 
+
         .data-active .data-content {
             opacity: 1;
             transform: translateY(0);
             margin-top: 1rem;
         }
+
 
         .dashboard-item {
             background: rgba(255, 255, 255, 0.05);
@@ -102,6 +113,7 @@
             min-height: 48px;
         }
 
+
         .status-pulse {
             animation: pulse 2s infinite;
         }
@@ -110,6 +122,7 @@
             70% { transform: scale(1.2); opacity: 1; }
             100% { transform: scale(0.9); opacity: 0.5; }
         }
+
 
         .flow-line {
             position: relative;
@@ -126,11 +139,13 @@
             background-color: var(--uoc-sky);
         }
 
+
         .uoc-logo {
             height: 48px;
             width: auto;
             display: block;
         }
+
 
         .zone-accordion {
             border: 1px solid #e2e8f0;
@@ -140,6 +155,7 @@
             transition: all 0.3s ease;
             margin-bottom: 0.75rem;
         }
+
 
         .zone-header {
             padding: 1.25rem 1.5rem;
@@ -151,9 +167,11 @@
             user-select: none;
         }
 
+
         .zone-header:hover {
             background: #f1f5f9;
         }
+
 
         .zone-body {
             max-height: 0;
@@ -162,14 +180,17 @@
             background: white;
         }
 
+
         .zone-open .zone-body {
             max-height: 2000px;
             border-top: 1px solid #f1f5f9;
         }
 
+
         .zone-open .chevron-icon {
             transform: rotate(180deg);
         }
+
 
         .service-card {
             background: #fbfcfd;
@@ -179,10 +200,12 @@
             transition: transform 0.2s ease;
         }
 
+
         .service-card:hover {
             transform: translateY(-2px);
             border-color: var(--uoc-sky);
         }
+
 
         .animate-fadeIn {
             animation: fadeIn 0.4s ease forwards;
@@ -191,6 +214,7 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
 
         /* Estils per l'Enquesta */
         .feedback-face {
@@ -211,6 +235,7 @@
 </head>
 <body>
 
+
     <header class="bg-white border-b-4 border-[#000078] sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center">
@@ -222,11 +247,12 @@
         </div>
     </header>
 
+
     <main class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
+       
         <!-- Columna Esquerra: Estadístiques, Navegació i Enquesta -->
         <div class="lg:col-span-4 space-y-4">
-            
+           
             <div class="space-y-3">
                 <!-- PAF EN XIFRES -->
                 <section id="paf-stats" class="data-accordion-card rounded-2xl p-4 text-white shadow-lg" onclick="toggleAccordion('paf-stats')">
@@ -237,7 +263,7 @@
                         </div>
                         <i class="fas fa-chevron-down text-[10px] opacity-50"></i>
                     </div>
-                    
+                   
                     <div class="data-content pt-2 space-y-4">
                         <div class="px-1 pt-2">
                             <h2 class="text-[10px] font-black text-[#73edff] uppercase tracking-[0.15em] italic">01. CONTEXT GLOBAL</h2>
@@ -245,21 +271,22 @@
                         <div class="grid grid-cols-2 gap-2">
                             <div class="dashboard-item">
                                 <p class="text-[6px] text-white/40 uppercase">Programes</p>
-                                <p class="text-[11px] font-bold">1.120</p>
+                                <p class="text-[11px] font-bold">1.074</p>
                             </div>
                             <div class="dashboard-item">
                                 <p class="text-[6px] text-white/40 uppercase">Assignatures</p>
-                                <p class="text-[11px] font-bold">3.700</p>
+                                <p class="text-[11px] font-bold">3.660</p>
                             </div>
                             <div class="dashboard-item">
                                 <p class="text-[6px] text-white/40 uppercase">Estudiants</p>
-                                <p class="text-[11px] font-bold">80.000</p>
+                                <p class="text-[11px] font-bold">70.000</p>
                             </div>
                             <div class="dashboard-item">
                                 <p class="text-[6px] text-white/40 uppercase">Assignacions</p>
-                                <p class="text-[11px] font-bold">247.000</p>
+                                <p class="text-[11px] font-bold">220.000</p>
                             </div>
                         </div>
+
 
                         <div class="px-1 pt-2 border-t border-white/10">
                             <h2 class="text-[10px] font-black text-[#73edff] uppercase tracking-[0.15em] italic">02. MODELS D'AVALUACIÓ</h2>
@@ -267,58 +294,65 @@
                         <div class="bg-white/5 p-3 rounded-xl space-y-2 border border-white/10">
                             <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
                                 <span class="text-[10px] font-bold uppercase text-white/60">Sense prova final</span>
-                                <span class="text-[12px] font-black italic text-white/60">61%</span>
+                                <span class="text-[12px] font-black italic text-white/60">60%</span>
                             </div>
                             <div class="flex justify-between items-center bg-uoc-sky/20 p-2 rounded-lg border border-uoc-sky/30">
                                 <span class="text-[10px] font-bold uppercase">Amb prova final (PAF)</span>
-                                <span class="text-[12px] font-black italic">39%</span>
+                                <span class="text-[12px] font-black italic">40%</span>
                             </div>
                         </div>
+
 
                         <div class="flow-line space-y-3">
                             <div class="relative">
                                 <div class="flow-dot"></div>
-                                <p class="text-[10px] font-bold text-white/80">Del 39% amb PAF:</p>
+                                <p class="text-[10px] font-bold text-white/80">Del 40% amb PAF:</p>
                                 <div class="grid grid-cols-1 gap-2 mt-1">
                                     <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center">
                                         <p class="text-[8px] text-white/40 uppercase">Superen AC (Exempts)</p>
-                                        <p class="text-[10px] font-bold">20%</p>
+                                        <p class="text-[10px] font-bold">15%</p>
                                     </div>
                                     <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center">
                                         <p class="text-[8px] text-white/40 uppercase">No aproven AC (Sense dret)</p>
-                                        <p class="text-[10px] font-bold">8%</p>
+                                        <p class="text-[10px] font-bold">9%</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="relative">
                                 <div class="flow-dot" style="background-color: #fff;"></div>
-                                <p class="text-[11px] font-black text-uoc-sky uppercase italic text-center py-1">72% han de fer la prova</p>
+                                <p class="text-[11px] font-black text-uoc-sky uppercase italic text-center py-1">76% han de fer la prova</p>
                             </div>
                         </div>
+
 
                         <div class="px-1 pt-2 border-t border-white/10">
                             <h2 class="text-[10px] font-black text-[#73edff] uppercase tracking-[0.15em] italic">03. PROVES FINALS</h2>
                         </div>
                         <div class="bg-uoc-sky/10 border border-uoc-sky/30 p-3 rounded-xl text-center mb-4">
-                            <p class="text-xl font-black italic">67.750</p>
+                            <p class="text-xl font-black italic">59.275</p>
                             <p class="text-[6px] text-uoc-sky uppercase font-bold">Proves convocades</p>
                         </div>
                         <div class="grid grid-cols-1 gap-2">
                             <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center">
                                 <p class="text-[8px] text-white/60 uppercase">Tradicionals síncrones</p>
-                                <p class="text-[10px] font-bold">46.000</p>
+                                <p class="text-[10px] font-bold">25.600</p>
+                            </div>
+                            <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center">
+                                <p class="text-[8px] text-white/60 uppercase">Canvas síncrones</p>
+                                <p class="text-[10px] font-bold">15.100</p>
                             </div>
                             <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center">
                                 <p class="text-[8px] text-white/60 uppercase">Canvas asíncrones</p>
-                                <p class="text-[10px] font-bold">16.250</p>
+                                <p class="text-[10px] font-bold">12.700</p>
                             </div>
                             <div class="bg-white/5 p-2 rounded-lg flex justify-between items-center border border-white/5">
                                 <p class="text-[8px] text-white/60 uppercase">Presencials FP</p>
-                                <p class="text-[10px] font-bold">5.500</p>
+                                <p class="text-[10px] font-bold">5.875</p>
                             </div>
                         </div>
                     </div>
                 </section>
+
 
                 <!-- QUADRE DE COMANDAMENT -->
                 <section id="dashboard" class="data-accordion-card rounded-2xl p-4 text-white shadow-lg" onclick="toggleAccordion('dashboard')">
@@ -336,11 +370,11 @@
                                 <p class="text-[7px] font-black text-uoc-sky uppercase text-center mb-1">Procés</p>
                                 <div class="dashboard-item">
                                     <p class="text-[5px] text-white/40 uppercase">Proves convocades</p>
-                                    <p class="text-[10px] font-bold">67.750</p>
+                                    <p class="text-[10px] font-bold">59.275</p>
                                 </div>
                                 <div class="dashboard-item">
                                     <p class="text-[5px] text-white/40 uppercase">% proves lliurades</p>
-                                    <p class="text-[10px] font-bold">32%</p>
+                                    <p class="text-[10px] font-bold">12%</p>
                                 </div>
                             </div>
                             <!-- Columna Atenció -->
@@ -348,7 +382,7 @@
                                 <p class="text-[7px] font-black text-uoc-sky uppercase text-center mb-1">Atenció</p>
                                 <div class="dashboard-item">
                                     <p class="text-[5px] text-white/40 uppercase">Casos</p>
-                                    <p class="text-[10px] font-bold">5.467</p>
+                                    <p class="text-[10px] font-bold">467</p>
                                 </div>
                                 <div class="dashboard-item">
                                     <p class="text-[5px] text-white/40 uppercase">Satisfacció CSAT</p>
@@ -375,10 +409,12 @@
                 </section>
             </div>
 
+
             <div class="pt-2">
                 <h2 class="text-[10px] font-black text-slate-400 uppercase mb-4 tracking-[0.2em] px-2 text-center lg:text-left">Explora els espais</h2>
                 <div id="floor-list" class="space-y-4"></div>
             </div>
+
 
             <!-- ENQUESTA DE SATISFACCIÓ -->
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 mt-6">
@@ -403,6 +439,7 @@
             </div>
         </div>
 
+
         <!-- Columna Dreta: Detalls de l'espai -->
         <div class="lg:col-span-8">
             <div id="content-area" class="bg-white rounded-3xl shadow-sm border border-slate-200 min-h-[650px] p-6 md:p-10 flex flex-col relative transition-all duration-500 overflow-hidden">
@@ -420,14 +457,15 @@
         </div>
     </main>
 
+
     <script>
         const buildingData = {
-            'O': { 
-                label: "Seu Central", 
-                title: "Edifici O", 
+            'O': {
+                label: "Seu Central",
+                title: "Edifici O",
                 subtitle: null,
-                icon: "fa-clipboard-list", 
-                image: "edifici_o.jpg", 
+                icon: "fa-clipboard-list",
+                image: "edifici_o.jpg",
                 layout: 'accordion',
                 zones: [
                     {
@@ -435,19 +473,19 @@
                         name: "Zona Mar",
                         icon: "fa-water",
                         services: [
-                            { 
-                                title: "Serveis acadèmics", 
-                                description: "Coordina els equips implicats, prepara tota la logística i fa el seguiment en temps real del desenvolupament de les proves. Dona resposta a incidències i dubtes de segon nivell per garantir que l’avaluació final es desenvolupi amb rigor i fluïdesa." 
+                            {
+                                title: "Serveis acadèmics",
+                                description: "Coordina els equips implicats, prepara tota la logística i fa el seguiment en temps real del desenvolupament de les proves. Dona resposta a incidències i dubtes de segon nivell per garantir que l’avaluació final es desenvolupi amb rigor i fluïdesa."
                             },
-                            { 
-                                title: "Tecnologia", 
-                                description: "Garanteix el correcte funcionament i l'estabilitat de les plataformes digitals i la infraestructura de xarxa durant el desenvolupament de les proves. Monitoritza en temps real el rendiment de les aplicacions involucrades i la interacció dels estudiants. L'equip propi i els diferents partners involucrats estan mobilitzats per poder actuar en cas d'incidència." 
+                            {
+                                title: "Tecnologia",
+                                description: "Garanteix el correcte funcionament i l'estabilitat de les plataformes digitals i la infrastructure de xarxa durant el desenvolupament de les proves. Monitoritza en temps real el rendiment de les aplicacions involucrades i la interacció dels estudiants. L'equip propi i els diferents partners involucrats estan mobilitzats per poder actuar en cas d'incidència."
                             },
                             { title: "Atenció a l'estudiant", description: "Acompanya als estudiants durant la realització de les proves per atendre les seves peticions de suport a través del xat, el telèfon i l'entorn virtual. Informa als estudiants sobre les qüestions que els hi puguin afectar durant la realització de les proves." },
                             { title: "Gestió de programes", description: "Activa dues línies de suport: una per als estudis i una altra per a l’operatiu de gestió. Ofereix suport tècnic síncron i no presencial als equips de PDI de guàrdia, per resoldre incidències i garantir el seguiment de les indicacions. En paral·lel, dona suport presencial a l’operatiu amb dos persones al matí i dos a la tarda, que supervisen el dispositiu i faciliten la coordinació amb els equips online." },
-                            { 
-                                title: "Atenció Xat - Extern", 
-                                description: "Acompanya als estudiants durant la realització de les proves per atendre els seus dubtes sobre el contingut de l'enunciat a través de les sales de xat per assignatura. En cas necessari deriven el dubte a l'equip de guàrdia del professorat per confirmar la resolució i respondre a l'estudiant" 
+                            {
+                                title: "Atenció Xat - Extern",
+                                description: "Acompanya als estudiants durant la realització de les proves per atendre els seus dubtes sobre el contingut de l'enunciat a través de les sales de xat per assignatura. En cas necessari deriven el dubte a l'equip de guàrdia del professorat per confirmar la resolució i respondre a l'estudiant"
                             }
                         ]
                     },
@@ -456,34 +494,36 @@
                         name: "Zona Muntanya",
                         icon: "fa-mountain",
                         services: [
-                            { 
-                                title: "Atenció 2n nivell - Extern", 
-                                description: "Equip que resol els casos derivats pel primer nivell d'atenció telefònic i que tenen a veure amb problemàtiques amb l'accés a l'enunciat o la pujada de l'arxiu de la prova. Dins d'aquest equipo també hi ha un dispositiu dedicat a donar suport de segon nivell a les incidències o dubtes de les proves asíncrones a Canvas." 
+                            {
+                                title: "Atenció 2n nivell - Extern",
+                                description: "Equip que resol els casos derivats pel primer nivell d'atenció telefònic i que tenen a veure amb problemàtiques amb l'accés a l'enunciat o la pujada de l'arxiu de la prova. Dins d'aquest equipo també hi ha un dispositiu dedicat a donar suport de segon nivell a les incidències o dubtes de les proves asíncrones a Canvas."
                             }
                         ]
                     }
                 ]
             },
-            'U': { 
-                label: "Zona Grafana", 
-                title: "Edifici U", 
+            'U': {
+                label: "Zona Grafana",
+                title: "Edifici U",
                 subtitle: "Suport Extern",
-                icon: "fa-network-wired", 
-                image: "edifici_c.jpg", 
+                icon: "fa-network-wired",
+                image: "edifici_c.jpg",
                 layout: 'simple',
                 services: [
-                    { 
-                        title: "Atenció Grafana", 
-                        description: "Monitoritza les incidències en la captació d'imatges per la validació de la identitat durant les proves i contacta proactivament amb l'estudiant per resoldre-les." 
+                    {
+                        title: "Atenció Grafana",
+                        description: "Monitoritza les incidències en la captació d'imatges per la validació de la identitat durant les proves i contacta proactivament amb l'estudiant per resoldre-les."
                     }
-                ] 
+                ]
             }
         };
+
 
         function toggleAccordion(id) {
             const el = document.getElementById(id);
             if(el) el.classList.toggle('data-active');
         }
+
 
         function toggleZone(zoneId) {
             const el = document.getElementById(zoneId);
@@ -492,21 +532,25 @@
             if (!isOpen) el.classList.add('zone-open');
         }
 
+
         function selectFloor(id) {
             const data = buildingData[id];
             const dynamicView = document.getElementById('dynamic-view');
             const defaultView = document.getElementById('default-view');
             const contentArea = document.getElementById('content-area');
 
+
             document.querySelectorAll('.floor-card').forEach(c => c.classList.remove('floor-active'));
             const activeBtn = document.getElementById(`floor-btn-${id}`);
             if (activeBtn) activeBtn.classList.add('floor-active');
 
+
             defaultView.classList.add('hidden');
             dynamicView.classList.remove('hidden');
 
+
             let contentHTML = '';
-            
+           
             if (data.layout === 'accordion') {
                 contentHTML = `<div class="mt-6 space-y-4">`;
                 data.zones.forEach(zone => {
@@ -552,9 +596,11 @@
                 contentHTML += `</div>`;
             }
 
+
             const subtitleHTML = data.subtitle ? `
                 <span class="text-[11px] font-black text-uoc-sky uppercase tracking-[0.2em] block -mt-1 mb-2">${data.subtitle}</span>
             ` : '';
+
 
             dynamicView.innerHTML = `
                 <div class="space-y-6 animate-fadeIn">
@@ -570,16 +616,18 @@
                     ${contentHTML}
                 </div>`;
 
+
             if (window.innerWidth < 1024) {
                 window.scrollTo({ top: contentArea.offsetTop - 80, behavior: 'smooth' });
             }
         }
 
+
         function renderFloorButtons() {
             const list = document.getElementById('floor-list');
             if (!list) return;
             list.innerHTML = '';
-            
+           
             Object.keys(buildingData).forEach(id => {
                 const data = buildingData[id];
                 const btn = document.createElement('div');
@@ -600,6 +648,7 @@
             });
         }
 
+
         function submitFeedback(score, emoji) {
             // Animació simple de selecció
             const faces = document.querySelectorAll('.feedback-face');
@@ -607,7 +656,7 @@
                 f.classList.remove('selected');
                 if (f.innerText === emoji) f.classList.add('selected');
             });
-            
+           
             // Simular enviament
             setTimeout(() => {
                 document.getElementById('survey-container').classList.add('hidden');
@@ -615,17 +664,19 @@
             }, 500);
         }
 
+
         function updateClock() {
             const clockEl = document.getElementById('real-time-clock');
             if(clockEl) clockEl.innerText = new Date().toLocaleTimeString('ca-ES');
         }
+
 
         window.onload = function() {
             renderFloorButtons();
             setInterval(updateClock, 1000);
             updateClock();
         };
-        
+       
         renderFloorButtons();
     </script>
 </body>
